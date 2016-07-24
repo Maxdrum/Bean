@@ -1,0 +1,92 @@
+<div class="container-fluid">
+
+    <h3>
+        Banner广告管理
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: right;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="advertisementAdd">&nbsp;&nbsp;新增&nbsp;&nbsp;</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="sort_list" style="margin:15px 0; ">
+                <ul dnd-list-header style="min-width: 700px;">
+                    <li>
+                        <div class="li-sec" style="width: 40%;min-width: 400px;">
+                            图像
+                        </div>
+                        <div class="li-sec" style="width: 45%;min-width: 340px;">
+                            链接
+                        </div>
+                        <div class="li-sec" style="width: 15%;border: none;min-width: 150px;">
+                            操作
+                        </div>
+                    </li>
+                </ul>
+                <ul dnd-list="currentBannerList" style="min-width: 700px;">
+
+
+                    <li ng-repeat="banner in currentBannerList"
+                        dnd-draggable="banner"
+                        dnd-type="1"
+                        dnd-moved="currentBannerList.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        class="body-li">
+                        <div class="li-sec" style="width: 40%;min-width: 400px;">
+                            <div class="handle">:::</div>
+                            <div class="name" dnd-nodrag>
+                                <img style="width:320px;height:135px;" src="{{banner.image}}">
+                            </div>
+                        </div>
+                        <div class="li-sec" style="width: 45%;min-width: 340px;">
+                            {{banner.url}}
+                        </div>
+                        <div class="li-sec" style="width: 15%;border: none;min-width: 150px;">
+                            <a type="button"  ui-sref="advertisementUpdate({bannerId:banner.id})" class="btn btn-info btn-sm">修改</a>
+                            <a type="button" style="margin-left: 10px;"
+                               class="btn btn-danger btn-sm" data-toggle="modal"
+                               ng-click="setDeleteBanner(banner.id)" data-target="#deleteBanner">
+                                删除
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="dndPlaceholder">
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteBanner" tabindex="-1" role="dialog" aria-labelledby="deleteBanner" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此banner么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteBanner()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+    <h3>
+        Banner广告修改
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 50px;"></div>
+    <div>
+        <form class="form-horizontal" name="updateForm">
+
+            <div class="col-sm-6" style="margin-bottom: 20px;">
+                <img style="margin-left: 10px;width:320px;height:135px;" src="{{image}}" >
+            </div>
+
+            <div class="col-sm-6" ng-show="files[0]" style="margin-bottom: 20px;">
+                <img style="margin-left: 10px;width:320px;height:135px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+            </div>
+
+            <div>
+                <div style="margin-top: 20px;width: 100px;">
+                    <button class="btn btn-info" ng-model="files" ngf-drop ngf-select class="well my-drop-zone btn btn-info" style="margin-bottom:5px;margin-left: 8px;"
+                            ngf-multiple="true" ngf-drag-over-class="file-over-class" accept="image/*"><i class="glyphicon glyphicon-plus"></i>上传图片</button>
+
+                </div>
+            </div>
+
+            <div>
+                <span>
+                    <label style="color: red;margin-left: 600px;margin-top: 10px;">*</label>
+                    <label style="margin-left: 10px;">图片建议宽640px，高270px。</label>
+                </span>
+            </div>
+
+            <div class="form-group" style="margin-left: 10px;">
+                <div class="col-sm-6">
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" value=1 ng-model="linkFlag"/> 外部链接
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value=0 ng-model="linkFlag"/> 内部链接
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label style="margin-left: 20px;width: 50px;">链接:</label>
+                <label style="width: 400px;">
+                    <input type="text" class="form-control"  ng-model="url" value="" placeholder="必填" required>
+                </label>
+                <label style="color: red;margin-left: 135px;margin-top: 10px;">*</label>
+                <label ng-show="((linkFlag==1) ? true : false)" style="margin-left: 10px;">请加上http:// 如"http://www.sina.com.cn"</label>
+                <label ng-show="((linkFlag==0) ? true : false)" style="margin-left: 10px;">内部链接,请拷贝商品详情 如"/store/1/store-product/10"</label>
+            </div>
+
+            <div class="form-group" style="margin-top: 40px;">
+                <div style="margin-left: 50px;">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+

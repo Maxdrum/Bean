@@ -1,0 +1,90 @@
+<div class="container-fluid">
+
+    <h3>
+        新增抵用券
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">优&nbsp;惠&nbsp;券&nbsp;名&nbsp;称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="couponName" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">优惠券名称</label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</label>
+                <div class="col-sm-6">
+                    <input type="number" min="1" max="10000" class="form-control" ng-model="amount" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">建议最大值不超过10000</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠开始时间</label>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="status.openedStart"
+                               max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                              <span class="input-group-btn">
+                                <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                    </p>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠结束时间</label>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="status.openedEnd"
+                               max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                          <span class="input-group-btn">
+                            <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">消&nbsp;&nbsp;费&nbsp;&nbsp;金&nbsp;&nbsp;额</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="money" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">抵&nbsp;&nbsp;用&nbsp;&nbsp;金&nbsp;&nbsp;额</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="discount" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="newCoupon()" class="btn btn-info">新增</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

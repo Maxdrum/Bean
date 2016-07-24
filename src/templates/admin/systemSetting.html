@@ -1,0 +1,140 @@
+<div class="container-fluid">
+
+    <h3>
+        系统设置
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="updateForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店&nbsp;铺&nbsp;标&nbsp;志</label>
+                <div class="col-sm-6">
+                    <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="image/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6">
+                        <img style="margin-left: 10px;width:240px;height:200px;" src="{{image}}" >
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:240px;height:200px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议比例为1:1。</label>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">微&nbsp;&nbsp;信&nbsp;&nbsp;号</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control" ng-model="wechatId">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">免配送金额</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="freight" placeholder="达到设置金额则免配送费" min=0 required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">免配送金额为整数</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">配&nbsp;&nbsp;&nbsp;送&nbsp;&nbsp;&nbsp;费</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="freightfee" placeholder="未达到免配送金额，则收取配送费" min=0 required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">配送费为整数</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="address" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">输入您的店铺地址</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">配&nbsp;送&nbsp;范&nbsp;围</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="scope" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">例如：苏州市园区范围</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">营&nbsp;业&nbsp;状&nbsp;态</label>
+                <div class="col-sm-6">
+                    <label class="radio-inline">
+                        <input type="radio" value="1" ng-model="workStatus"/> 是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="2" ng-model="workStatus"/> 否
+                    </label>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">选择"否",则微信不可下单</label>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">营业时间</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control" ng-model="worktime" placeholder="必填" required>-->
+                <!--</div>-->
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+                <!--<label style="margin-left: 10px;">例如：8:00am - 9:00pm</label>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="margin-top: 35px;">营&nbsp;业&nbsp;时&nbsp;间</label>
+                <div class="col-sm-6">
+                    <div style="display: inline-block;">
+                        <uib-timepicker ng-model="startDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                    <div style="display: inline-block;position: relative;top: -45px;">
+                        <label style="margin-left: 30px;">~</label>
+                    </div>
+                    <div style="display: inline-block;margin-left: 30px;">
+                        <uib-timepicker ng-model="endDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 45px;">*</label>
+                <label style="margin-left: 10px;margin-top: 35px;">例如：8:00 ~ 21:00</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="telephone" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请输入您的店铺电话</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">简&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="4" ng-model="introduce"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">保存</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

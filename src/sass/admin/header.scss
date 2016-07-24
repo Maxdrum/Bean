@@ -1,0 +1,121 @@
+@import "variables";
+.header-nav {
+  height : $header-height;
+  border : 0;
+  background: $jcy-black;
+
+  #header_logo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: 0;
+    display: block;
+    padding: 0;
+    width: 220px;
+    height: $header-height;
+    overflow: hidden;
+    line-height: 100em;
+    text-indent: -99999px;
+    background-repeat: no-repeat;
+    background-image:url('../images/logo-2.png');
+  }
+  #header_logo:hover{
+    background-position: 0;
+  }
+
+
+  @media (max-width: 910px) and (min-width: 768px){
+    #header_menu {
+      margin-left: 90px !important;
+    }
+
+    #header_logo {
+      width: 59px !important;
+    }
+  }
+
+
+  @media (max-width: 768px){
+    #header_menu {
+      margin-left: auto !important;
+    }
+
+    .navbar-collapse {
+      background: #393939 !important;
+      margin: 0 -2% 0 -2%;
+    }
+
+  }
+
+
+  #header_menu {
+    margin-left: 200px;
+    li {
+
+      background: none;
+      line-height: $header-height;
+      a {
+        line-height: 35px;
+        height: 35px;
+        padding: 0 20px;
+        margin-top: 12px;
+        border-radius: 3px;
+        color: #aaa;
+
+      }
+      a:hover {
+        color: #fff;
+      }
+    }
+    li.active{
+      a {
+        color: #fff;
+        background: #555;
+        box-shadow: none;
+      }
+    }
+  }
+
+  #header_me {
+    margin-right : 0px;
+    li {
+      line-height: 35px;
+      a {
+        height : 35px;
+        line-height: 35px;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size : 14px;
+      }
+    }
+
+    >li {
+      line-height: $header-height;
+      >a {
+        height : $header-height;
+        line-height: $header-height;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    li.divider-vertical {
+      border-style: solid;
+      border-width: 1px;
+      opacity: .5;
+      height: 58px;
+      border-left-color: #111415;
+      border-right-color: #646668;
+    }
+  }
+
+  .hasMsg{
+    color:$jcy-orange;
+  }
+
+  .broadcast-header {
+    position: absolute;
+    margin-left: 220px;
+    width: 100%;
+  }
+}

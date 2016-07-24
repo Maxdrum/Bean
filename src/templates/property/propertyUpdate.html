@@ -1,0 +1,74 @@
+<div class="container-fluid">
+
+    <h3>
+        修改物业分类
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 30px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">一级分类</label>
+                <div class="condition batch-ops col-sm-4">
+                    <select class="form-control" ng-model="parentid">
+                        <!--<option value="">所有分类</option>-->
+                        <option value="1">送水服务</option>
+                        <option value="2">维修服务</option>
+                        <option value="3">车位服务</option>
+                        <option value="4">园艺服务</option>
+                        <!--<option value="5">商务策划</option>-->
+                        <option value="6">留言与建议</option>
+                    </select>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">二级分类</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="title" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">列表图片</label>-->
+                <!--<div class="col-sm-4">-->
+
+                    <!--<div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"-->
+                         <!--ngf-drag-over-class="file-over-class" ngf-multiple="true"-->
+                         <!--accept="image/*">点击上传图片-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4">-->
+                        <!--<img style="margin-left: 10px;width:50px;height:50px;" src="{{image}}" >-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-4" ng-show="files[0]">-->
+                        <!--<img style="margin-left: 10px;width:50px;height:50px;" ngf-src="files[0]"  ngf-accept="'image/*'">-->
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+                <!--<label style="margin-left: 10px;">图片建议宽100px,高100px</label>-->
+
+            <!--</div>-->
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="updateType()" class="btn btn-info">保存</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

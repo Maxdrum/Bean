@@ -1,0 +1,199 @@
+<div class="container-fluid">
+
+    <h3>
+        订单管理
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+                        <!--<label>从：</label>-->
+                        <div class="col-lg-7 col-md-12 col-sm-12">
+                            <div class="form-group" style="margin-left: -15px;">
+                                <p class="input-group">
+                                    <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="status.openedStart"
+                                           max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                              <span class="input-group-btn">
+                                <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                                </p>
+                            </div>
+
+
+                        <div class="form-group">
+                            <label>到：</label>
+                        </div>
+                        <div class="form-group">
+                                <p class="input-group">
+                                    <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="status.openedEnd"
+                                           max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                          <span class="input-group-btn">
+                            <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 col-sm-12" style="min-width: 700px;">
+                            <div class="form-group" style="margin-left: -15px;">
+                                <input type="text" class="form-control" ng-model="orderSn" placeholder="订单号">
+                            </div>
+                            <div class="form-group">
+                                <input type="phone" class="form-control" style="margin-left: 5px;" ng-model="phone" placeholder="手机号">
+                            </div>
+                            <div class="form-group">
+                                <!--<select class="form-control" style="width: 120px;margin-left: 5px;" min='0' ng-model="company.followSalesman" ng-options="followSalesman.name for followSalesman in currentFollowSalesmanList track by followSalesman._id">-->
+                                <!--<option value="">状态</option>-->
+                                <!--</select>-->
+                                <div class="condition batch-ops col-sm-3" >
+                                    <select class="form-control" ng-model="orderStatus" style="width: 120px">
+                                        <option value="">状态</option>
+                                        <option value="未处理">未处理</option>
+                                        <option value="订单已处理">已处理</option>
+                                        <option value="订单已取消">已取消</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <button type="submit" class="btn btn-info" ng-click="getPageData(false);getSumCount()">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="form-inline" >
+
+                    <div class="form-group" style="margin-left: 15px;margin-top: 20px;">
+                        <p>订单总价：￥{{sumAmount}}</p>
+                    </div>
+                    <div class="form-group" style="margin-left: 100px;margin-top: 20px;" ng-show="(flag2 == 1) ? true : false">
+                        <p>消耗积分：{{point}}分</p>
+                    </div>
+                    <div class="form-group" style="margin-left: 100px;margin-top: 20px;">
+                        <p>订单总数：{{total}}</p>
+                    </div>
+
+                </form>
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">订单号</th>
+                    <th style="text-align:center;">下单时间</th>
+                    <th style="text-align:center;">买家手机号</th>
+                    <th style="text-align:center;">订单价格</th>
+                    <th style="text-align:center;" ng-show="(flag2 == 1) ? true : false">积分</th>
+                    <th style="text-align:center;">订单状态</th>
+                    <th style="text-align:center;">支付方式</th>
+                    <th style="text-align:center;">支付状态</th>
+                    <th style="text-align:center;" width="170px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in currentOrderList track by $index">
+                    <td align="center">
+                        <a ui-sref="orderDetail({orderId:order.id})" href="javascript:;">{{order.orderSn}}
+                        </a>
+                    </td>
+                    <td align="center">{{order.createDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td align="center">{{order.phone}}</td>
+                    <td align="center">￥{{order.totalPrice}}</td>
+                    <td align="center" ng-show="(flag2 == 1) ? true : false">{{order.point}}</td>
+                    <td align="center">{{order.orderStatus}}</td>
+                    <td align="center">{{order.paymentMethod}}</td>
+                    <td align="center"
+                        ng-class="{'redText' : !(((order.paymentMethod == '现金')&&(order.orderStatus == '订单已处理'))||(order.paidSn)||(order.paymentMethod == '积分'))}">
+                        {{(((order.paymentMethod == '现金')&&(order.orderStatus == '订单已处理'))||(order.paidSn)||(order.paymentMethod == '积分'))  ? '已支付' : '未支付'}}
+                    </td>
+                    <td align="center"><a type="button"  ui-sref="orderDetail({orderId:order.id})" class="btn btn-info btn-sm">查看</a>
+                        <a type="button" class="btn btn-success btn-sm btnDealId-{{order.id}}" ng-class="{disabled:((order.orderStatus == '未处理') ? false : true)}" ng-click="setHandle(order.id);handle()" ng-hide="((order.orderStatus == '订单已处理') ? true : false)">处理</a>
+                        <a type="button" class="btn btn-success btn-sm btnDoneId-{{order.id}}" ng-class="{disabled:true}" ng-show="((order.orderStatus == '订单已处理') ? true : false)">
+                            完成
+                        </a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:((order.orderStatus == '未处理') ? false : true)}" data-toggle="modal" ng-click="setDeleteAccount(order.id,order.paidSn,order.paymentMethod)" data-target="#deleteMember" ng-hide="((order.orderStatus == '订单已取消' || flag2 == 1) ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:((order.orderStatus == '未处理') ? false : true)}" data-toggle="modal" ng-click="setDeleteAccount(order.id,order.paidSn,order.paymentMethod)" data-target="#orderCancel" ng-hide="((order.orderStatus == '订单已取消' || flag2 == 0) ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:true}" ng-show="((order.orderStatus == '订单已取消') ? true : false)">
+                            失效
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <!--<div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">-->
+                <!--<p >{{totalCount}}个商品</p>-->
+            <!--</div>-->
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="deleteMember" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="payRefund();orderCancel()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderCancel" tabindex="-1" role="dialog" aria-labelledby="orderCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="order">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <!--<button ng-click="orderCancel();payRefund()" class="btn btn-default" data-dismiss="modal">返还现金</button>-->
+                    <button ng-click="payRefund();orderCancel()" class="btn btn-default" data-dismiss="modal">返还现金和积分</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

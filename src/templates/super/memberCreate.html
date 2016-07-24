@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+    <h3>
+        新增会员
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="updateForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员姓名</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" min='0' ng-disabled="disableName" ng-model="company.fullName">
+                </div>
+                <label></label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员电话</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" min='0' ng-disabled="disableName" ng-model="company.fullName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员邮箱</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" min='0' ng-disabled="disableName" ng-model="company.fullName">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">新增会员</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

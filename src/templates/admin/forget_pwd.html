@@ -1,0 +1,60 @@
+<div class="container-fluid" style="border: 1px solid #e1e1e1;width: 50%;margin: 30px auto;">
+    <h3>
+        找回密码
+    </h3>
+    <hr/>
+    <div ng-hide="changePwdSucceed">
+        <form>
+            <div class="row" style="padding: 0 20px;">
+
+                <div class="input-field col s12">
+                    <!--<i class="material-icons prefix" style="-webkit-mask-image: url('');">phone</i>-->
+                    <input id="icon_telephone" type="tel" class="validate" ng-model="phone">
+                    <label for="icon_telephone">手机号</label>
+                </div>
+
+                <div class="file-field input-field col s12">
+                    <a class="waves-effect waves-light btn grey" ng-class="{disabled:captchaDisabled}" type="submit" style="padding: 0 12px;"
+                       ng-click="sendCAPTCHA()">{{captchaBtn}}</a>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" ng-model="captcha">
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <!--<i class="material-icons prefix" style="-webkit-mask-image: url('');">phone</i>-->
+                    <input id="currentPwd_1" type="password" class="validate" ng-model="pwd_1" equals="{{pwd_2}}" required>
+                    <label for="currentPwd_1">新密码</label>
+                </div>
+                <div class="input-field col s12">
+                    <!--<i class="material-icons prefix" style="-webkit-mask-image: url('');">phone</i>-->
+                    <input id="currentPwd_2" type="password" class="validate" ng-model="pwd_2" equals="{{pwd_1}}" required>
+                    <label for="currentPwd_2">确认新密码</label>
+                    <p class="bg-danger" ng-show="pwdNotEqual">请输入正确的新密码</p>
+                </div>
+
+
+
+                <div class="col s12" style="margin-top: 30px;">
+                    <button class="btn waves-effect waves-light btn-large"
+                            ng-click="changePwdwithCAP()"
+                            ng-disabled="pwdNotEqual"
+                            type="button"
+                            name="action">确认修改</button>
+                </div>
+
+            </div>
+        </form>
+        <hr/>
+    </div>
+
+    <div ng-show="changePwdSucceed" style="text-align: center;padding-bottom: 15px;">
+        <h3>修改成功</h3>
+        <h4 class="col s12" style="text-align: center">恭喜您修改密码成功！</h4>
+        <button type="button" class="btn btn-info " ui-sref="home">&nbsp&nbsp返回首页&nbsp&nbsp</button>
+    </div>
+
+
+</div>
+
+

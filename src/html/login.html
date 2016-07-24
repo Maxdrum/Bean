@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+
+    <link rel="stylesheet" media="all" href="/bower/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="/bower/materialize/dist/css/materialize.min.css" />
+    <link rel="stylesheet" href="/css/login.css"/>
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+</head>
+<body>
+{% include "./layout/header.html" %}
+
+<div class="login-form">
+    <form class="" action="/login" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <!--<i class="material-icons prefix">phone</i>-->
+                <input id="telephone" type="text" name="username" class="validate">
+                <label for="telephone">用户名</label>
+            </div>
+            <div class="input-field col s12">
+                <!--<i class="material-icons prefix">vpn_key</i>-->
+                <input id="password" type="password" name="password" class="validate">
+                <label for="password">密码</label>
+            </div>
+            <p style="margin-left: 10px;color:red;">{{err}}</p>
+            <div class="input-field col s12">
+                <a href="/home#/forget_pwd">忘记密码</a>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" style="float:right" name="action">登录
+            </button>
+        </div>
+
+    </form>
+</div>
+
+
+<script src="/bower/jquery/dist/jquery.js"></script>
+<script src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower/materialize/dist/js/materialize.min.js"></script>
+</body>
+</html>

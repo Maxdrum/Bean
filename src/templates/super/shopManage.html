@@ -1,0 +1,149 @@
+<div class="container-fluid">
+
+    <h3>
+        店铺列表
+    </h3>
+
+    <div>
+        <div style="height: 340px;">
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: left;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="shopCreate">新增店铺</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="panel-body sort_list">
+
+                <ul dnd-list-header>
+                    <li>
+                        <div class="li-sec" style="width: 20%;">
+                            店铺名
+                        </div>
+                        <div class="li-sec" style="width: 10%;">
+                            店铺状态
+                        </div>
+                        <div class="li-sec" style="width: 10%;">
+                            营业状态
+                        </div>
+                        <div class="li-sec" style="width: 15%;">
+                            营业时间
+                        </div>
+                        <div class="li-sec" style="width: 15%;">
+                            联系电话
+                        </div>
+                        <div class="li-sec" style="width: 15%;">
+                            生成链接
+                        </div>
+                        <div class="li-sec" style="width: 15%;border: none;white-space: nowrap">
+                            操作
+                        </div>
+                    </li>
+                </ul>
+
+                <ul dnd-list="currentShopList">
+
+
+                    <li ng-repeat="shop in currentShopList"
+                        dnd-draggable="shop"
+                        dnd-type="1"
+                        dnd-moved="currentShopList.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        class="background-shop">
+                        <div class="li-sec" style="width: 20%;">
+                            <div class="handle">:::</div>
+                            <div class="name" dnd-nodrag>
+                                <a ui-sref="shopUpdate({shopId:shop.id})">
+                                    {{shop.storeName}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="li-sec" style="width: 10%;">
+                            {{(shop.flag1 == 1 || shop.flag1 == 2) ? '开启' : '关闭'}}
+                        </div>
+                        <div class="li-sec" style="width: 10%;">
+                            {{(shop.flag1 == 1) ? '是' : '否'}}
+                        </div>
+                        <div class="li-sec" style="width: 15%;">
+                            {{shop.worktime}}
+                        </div>
+                        <div class="li-sec" style="width: 15%;">
+                            {{shop.telephone}}
+                        </div>
+                        <div class="li-sec" style="width: 15%;margin: auto;">
+                            <a type="button" id="showthisButton" ng-click="setLinkAccount(shop.id);setLink();shop.disableLink=false" ng-show="shop.disableLink" class="btn btn-info btn-sm">店铺链接</a>
+                            <input ng-hide="shop.disableLink" class="form-control" ng-model="shop.link" type="text" style="text-align: center;display: inline-block;">
+                        </div>
+                        <div class="li-sec" style="width: 15%;border: none;white-space: nowrap">
+                            <a type="button"  ui-sref="shopUpdate({shopId:shop.id})" class="btn btn-info btn-sm">修改</a>
+                            <a type="button" class="btn btn-danger btn-sm" ng-show="((shop.flag1 == 0) ? false : true)" style="margin-left: 15px;" data-toggle="modal" ng-click="setDeleteShop(shop.id)" data-target="#closeShop">关闭</a>
+                            <a type="button" class="btn btn-success btn-sm" ng-show="((shop.flag1 == 1 || shop.flag1 == 2) ? false : true)" style="margin-left: 15px;" data-toggle="modal" ng-click="setOpenShop(shop.id);openShop()">开启</a>
+                        </div>
+                    </li>
+
+                    <li class="dndPlaceholder">
+
+                    </li>
+
+                </ul>
+            </div>
+            <!--<table class="table table-bordered" style="margin-top:20px;">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th style="text-align:center;">店铺名</th>-->
+                    <!--<th style="text-align:center;">状态</th>-->
+                    <!--<th style="text-align:center;">营业时间</th>-->
+                    <!--<th style="text-align:center;">联系电话</th>-->
+                    <!--<th style="text-align:center;" width="200px;">操作</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="shop in currentShopList track by $index">-->
+                    <!--<td align="center">-->
+                        <!--<a ui-sref="shopUpdate({shopId:shop.id})">{{shop.storeName}}-->
+                        <!--</a>-->
+                    <!--</td>-->
+                    <!--<td align="center">{{shop.flag1 == 1 ? '开启' : '关闭'}}</td>-->
+                    <!--<td align="center">{{shop.worktime}}</td>-->
+                    <!--<td align="center">{{shop.telephone}}</td>-->
+                    <!--<td align="center">-->
+                        <!--<a type="button"  ui-sref="shopUpdate({shopId:shop.id})" class="btn btn-info btn-sm">修改</a>-->
+                        <!--<a type="button" class="btn btn-danger btn-sm" ng-show="((shop.flag1 == 0) ? false : true)" style="margin-left: 20px;" data-toggle="modal" ng-click="setDeleteShop(shop.id)" data-target="#closeShop">关闭</a>-->
+                        <!--<a type="button" class="btn btn-success btn-sm" ng-show="((shop.flag1 == 1) ? false : true)" style="margin-left: 20px;" data-toggle="modal" ng-click="setOpenShop(shop.id);openShop()">开启</a>-->
+                    <!--</td>-->
+
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        </div>
+
+
+
+
+
+    </div>
+    <div class="modal fade" id="closeShop" tabindex="-1" role="dialog" aria-labelledby="closeShop" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认关闭</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要关闭此商品么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="closeShop()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

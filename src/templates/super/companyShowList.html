@@ -1,0 +1,97 @@
+<div class="container-fluid">
+
+    <h3>
+        企业秀列表
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: left;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="companyShowAdd">新增企业秀</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">标题</th>
+                    <th style="text-align:center;">图片新闻</th>
+                    <th style="text-align:center;">发布时间</th>
+                    <th style="text-align:center;" width="300px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="info in currentInfoList track by $index">
+                    <td align="center">
+                        <a ui-sref="companyShowUpdate({showId:info.activityId})">{{info.title}}
+                        </a>
+                    </td>
+                    <td align="center">{{info.showBanner == 1 ? '是' : '否'}}</td>
+                    <td align="center">{{info.createdDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+
+                    <td align="center"><a type="button"  ui-sref="companyShowUpdate({showId:info.activityId})" class="btn btn-info btn-sm">修改</a>
+                        <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteInfo(info.activityId)" data-target="#deleteInformation">删除</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{countTotal}}条企业秀</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteInformation" tabindex="-1" role="dialog" aria-labelledby="deleteInformation" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此条企业秀么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteInfo()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

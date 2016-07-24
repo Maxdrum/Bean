@@ -1,0 +1,463 @@
+@import "variables";
+@import "header";
+$titleColor : #5c6371;
+$linkBlue : #31b0d5;
+.left-panel {
+  overflow: scroll;
+  //  width: $leftWidth;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: $jcy-black;
+  min-height: 482px;
+  //transition:all .5s ease-in-out;
+}
+
+.center-panel {
+  height: 100%;
+  margin-right: 0px;
+  //  margin-left: $leftWidth;
+  position: relative;
+  background: white;
+
+}
+.center-panel>div>div {
+  position: absolute;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.left_menu_module{
+  margin: 0;
+  padding: 0;
+  li {
+    list-style-type: none;
+    i.glyphicon {
+      margin-right: 20px;
+    }
+  }
+  .left_menu_item{
+    color: #aeb2b7;
+    display: block;
+    padding: 15px 0 15px 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+  }
+  .left_menu_item-lighten{
+    background-color: #5d5d5d;
+  }
+  .left_menu_item.active {
+    color: $linkBlue;
+    background: rgba(255,255,255,0.05);
+  }
+  .left_menu_item:hover {
+    color: $linkBlue;
+    background: rgba(255,255,255,0.05);
+  }
+}
+.left_menu_footer {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.left_menu_footer li {
+
+  list-style-type: none;
+  float: left;
+  width: 33%;
+  text-align: center;
+  padding: 2px;
+  a{
+    color: #aeb2b7;
+    display: block;
+    padding: 6px 0 8px 0;
+    margin: 2px;
+    border-radius: 5px;
+    :hover {
+      color: $linkBlue;
+      background: rgba(255,255,255,0.05);
+    }
+  }
+
+}
+div.hr_black {
+  margin: 1px auto;
+  border-top: solid 1px #111415;
+  border-bottom: solid 1px #646668;
+}
+.redText {
+  color : red;
+}
+
+.greyText {
+  background-color : #aeb2b7;
+}
+//for sort list page
+.sort_list {
+
+  ul[dnd-list],
+  ul[dnd-list] > li {
+      position: relative;
+  }
+
+  /**
+   * The dnd-list should always have a min-height,
+   * otherwise you can't drop to it once it's empty
+   */
+  ul[dnd-list] {
+      min-height: 42px;
+      padding-left: 0px;
+      margin-bottom: 0px;
+  }
+
+  /**
+   * The dndDraggingSource class will be applied to
+   * the source element of a drag operation. It makes
+   * sense to hide it to give the user the feeling
+   * that he's actually moving it.
+    */
+    ul[dnd-list] .dndDraggingSource {
+    display: none;
+  }
+
+    /**
+     * An element with .dndPlaceholder class will be
+     * added to the dnd-list while the user is dragging
+     * over it.
+     */
+    ul[dnd-list] .dndPlaceholder {
+      display: block;
+      background-color: #ddd;
+      min-height: 42px;
+    }
+
+    /**
+     * The dnd-lists's child elements currently MUST have
+     * position: relative. Otherwise we can not determine
+     * whether the mouse pointer is in the upper or lower
+     * half of the element we are dragging over. In other
+     * browsers we can use event.offsetY for this.
+     */
+    ul[dnd-list] li {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      display: flex;
+      height: 45px;
+      line-height: 45px;
+      //padding: 10px 15px;
+      margin-bottom: -1px;
+
+      /* Disable text selection if item is not draggable */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /**
+     * Gender-specifc background
+     */
+    ul[dnd-list] li.background-shop {
+      //background-color: #CAE0FC;
+    }
+
+    ul[dnd-list] input.background-shop {
+      //background-color: #D8E9FF;
+      //color: #2F4D99;
+    }
+
+
+  ul[dnd-list-header],
+  ul[dnd-list-header] > li {
+    position: relative;
+  }
+
+  /**
+   * The dnd-list should always have a min-height,
+   * otherwise you can't drop to it once it's empty
+   */
+  ul[dnd-list-header] {
+    min-height: 42px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+  }
+
+  /**
+   * The dndDraggingSource class will be applied to
+   * the source element of a drag operation. It makes
+   * sense to hide it to give the user the feeling
+   * that he's actually moving it.
+    */
+  ul[dnd-list-header] .dndDraggingSource {
+    display: none;
+  }
+
+  /**
+   * An element with .dndPlaceholder class will be
+   * added to the dnd-list while the user is dragging
+   * over it.
+   */
+  ul[dnd-list-header] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 42px;
+  }
+
+  /**
+   * The dnd-lists's child elements currently MUST have
+   * position: relative. Otherwise we can not determine
+   * whether the mouse pointer is in the upper or lower
+   * half of the element we are dragging over. In other
+   * browsers we can use event.offsetY for this.
+   */
+  ul[dnd-list-header] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: flex;
+    height: 45px;
+    line-height: 45px;
+    //padding: 10px 15px;
+    margin-bottom: -1px;
+
+    /* Disable text selection if item is not draggable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+    /**
+     * Handle positioning
+     */
+    .handle {
+      cursor: move;
+      margin-left: 10px;
+      display: inline-block;
+      position: absolute;
+      left: 5px;
+      //position: absolute;
+      //top: 14px;
+    }
+
+    .name {
+      //margin-left: 20px;
+    }
+  .li-sec{
+    text-align: center;
+    display: inline-block;
+    div{
+      display: inline-block;
+    }
+    //padding: 5px;
+
+    //height: 100%;
+    border-right: 1px solid #ddd;
+  }
+}
+
+.sortList {
+
+  ul[dnd-list],
+  ul[dnd-list] > li {
+    position: relative;
+  }
+
+  /**
+   * The dnd-list should always have a min-height,
+   * otherwise you can't drop to it once it's empty
+   */
+  ul[dnd-list] {
+    min-height: 42px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+  }
+
+  /**
+   * The dndDraggingSource class will be applied to
+   * the source element of a drag operation. It makes
+   * sense to hide it to give the user the feeling
+   * that he's actually moving it.
+    */
+  ul[dnd-list] .dndDraggingSource {
+    display: none;
+  }
+
+  /**
+   * An element with .dndPlaceholder class will be
+   * added to the dnd-list while the user is dragging
+   * over it.
+   */
+  ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 100px;
+  }
+
+  /**
+   * The dnd-lists's child elements currently MUST have
+   * position: relative. Otherwise we can not determine
+   * whether the mouse pointer is in the upper or lower
+   * half of the element we are dragging over. In other
+   * browsers we can use event.offsetY for this.
+   */
+  ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: flex;
+    height: 45px;
+    line-height: 45px;
+    //padding: 10px 15px;
+    margin-bottom: -1px;
+
+    /* Disable text selection if item is not draggable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  ul[dnd-list] li.body-li {
+    height: 280px;
+    line-height: 280px;
+  }
+
+  /**
+   * Handle positioning
+   */
+  .handle {
+    cursor: move;
+    margin-left: 10px;
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    //position: absolute;
+    //top: 14px;
+  }
+
+  .name {
+    //margin-left: 20px;
+  }
+  .li-sec{
+    text-align: center;
+    display: inline-block;
+    div{
+      display: inline-block;
+    }
+    //padding: 5px;
+
+    //height: 100%;
+    border-right: 1px solid #ddd;
+  }
+
+  ul[dnd-list-header],
+  ul[dnd-list-header] > li {
+    position: relative;
+  }
+
+  /**
+   * The dnd-list should always have a min-height,
+   * otherwise you can't drop to it once it's empty
+   */
+  ul[dnd-list-header] {
+    min-height: 42px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+  }
+
+  /**
+   * The dndDraggingSource class will be applied to
+   * the source element of a drag operation. It makes
+   * sense to hide it to give the user the feeling
+   * that he's actually moving it.
+    */
+  ul[dnd-list-header] .dndDraggingSource {
+    display: none;
+  }
+
+  /**
+   * An element with .dndPlaceholder class will be
+   * added to the dnd-list while the user is dragging
+   * over it.
+   */
+  ul[dnd-list-header] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 100px;
+  }
+
+  /**
+   * The dnd-lists's child elements currently MUST have
+   * position: relative. Otherwise we can not determine
+   * whether the mouse pointer is in the upper or lower
+   * half of the element we are dragging over. In other
+   * browsers we can use event.offsetY for this.
+   */
+  ul[dnd-list-header] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: flex;
+    height: 45px;
+    line-height: 45px;
+    //padding: 10px 15px;
+    margin-bottom: -1px;
+
+    /* Disable text selection if item is not draggable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  ul[dnd-list-header] li.body-li {
+    height: 280px;
+    line-height: 280px;
+  }
+}
+
+.activity-quill{
+  width: 400px;
+  img{
+    width: 100% !important;
+  }
+  margin: 20px 0 20px 5%;
+  border: 1px solid #ddd;
+  #editor-container {
+    min-height: 300px;
+    max-height: 500px;
+    border-top: 1px solid #ddd;
+  }
+  .ql-editor {
+    min-height: 150px;
+    max-height: 400px;
+  }
+}

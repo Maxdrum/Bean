@@ -1,0 +1,206 @@
+<div class="container-fluid">
+
+    <h3>
+        商品修改
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" ng-click="goBack()">返回</a>
+        </div>
+
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="updateForm">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">商品名称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="name" value="" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">名称为中文、英文和数字</label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">商&nbsp;&nbsp;品&nbsp;&nbsp;码</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="sn" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">类别</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control"  ng-model="category" value="">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+                <div class="col-sm-6">
+                        <select class="form-control" style="width: 120px" min='0' ng-model="category" ng-options="category.categoryName for category in currentCategoryList track by category.id">
+                            <!--<option value="">类别</option>-->
+                        </select>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+
+            <div class="form-group" ng-show="(flag2 == 0) ? true : false">
+                <label class="col-sm-2 control-label">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="marketPrice" value="" min=0 max="99999" placeholder="必填">
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">最多保留一位小数</label>
+            </div>
+
+            <div class="form-group" ng-show="(flag2 == 1) ? true : false">
+                <label class="col-sm-2 control-label">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="marketPrice" value="" min=0 max="99999" placeholder="不填默认为0">
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">最多保留一位小数</label>
+            </div>
+
+            <div class="form-group" ng-show="(flag2 == 1) ? true : false">
+                <label class="col-sm-2 control-label">积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="point" min=0 placeholder="不填默认为0">
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">必须为整数</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠产品</label>
+                <div class="col-sm-6">
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" value="true" ng-model="isFav"/> 是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="false" ng-model="isFav"/> 否
+                        </label>
+                    </div>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">选择“是”后商品会出现在优惠列表中</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</label>
+                <div class="col-sm-6">
+                    <input type="number"  class="form-control" ng-model="amount" value="" min=0>
+                </div>
+                <label style="margin-left: 30px;">不填库存为无限</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="margin-top: 35px;">售卖时间</label>
+                <div class="col-sm-6">
+                    <div style="display: inline-block;">
+                        <uib-timepicker ng-model="startDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                    <div style="display: inline-block;position: relative;top: -45px;">
+                        <label style="margin-left: 30px;">~</label>
+                    </div>
+                    <div style="display: inline-block;margin-left: 30px;">
+                        <uib-timepicker ng-model="endDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 45px;">*</label>
+                <label style="margin-left: 10px;margin-top: 35px;">例如：8:00 ~ 21:00</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">商品大图</label>
+                <div class="col-sm-6">
+
+                        <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                             ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                             accept="image/*">点击上传图片
+                        </div>
+
+                    <div class="col-sm-6" ng-hide="files[0]">
+                        <img style="margin-left: 10px;width:240px;height:200px;" src="{{image}}" >
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:240px;height:200px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                        <!--<div ng-repeat="file in imageFiles track by $index" class="gallery-box" style="display: inline-block;width:30%;">-->
+                            <!--<span class="title ng-binding">{{file.name}}</span>-->
+
+                            <!--<div class="thumbnail" ng-show="file" style="">-->
+                                <!--<img ngf-src="file" ngf-default-src="X_context.imgHost" style="width:240px;height:200px;" ngf-accept="'image/*'">-->
+                            <!--</div>-->
+
+                            <!--<div class="btn-group">-->
+                                <!--<a class="btn btn-xs btn-danger" ng-click="removeImg($index)">-->
+                                    <!--取消-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                </div>
+                    <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                    <label style="margin-left: 10px;">图片建议宽240像素，高200像素。</label>
+
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<div class="col-sm-12">-->
+                    <!--<div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"-->
+                         <!--ngf-drag-over-class="file-over-class" ngf-multiple="true"-->
+                         <!--accept="image/*">拖拽 / 点击上传图片-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-sm-12">-->
+
+                    <!--<div ng-repeat="file in imageFiles track by $index" class="gallery-box">-->
+                        <!--<span class="title ng-binding">{{file.name}}</span>-->
+
+                        <!--<div class="thumbnail" ng-show="file">-->
+                            <!--<img ngf-src="file" ngf-default-src="/image/projectDetailIcon.png" ngf-accept="'image/*'">-->
+                        <!--</div>-->
+
+                        <!--<div class="btn-group">-->
+                            <!--<a class="btn btn-xs btn-danger" ng-click="removeImg($index)">-->
+                                <!--取消-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">产品详情</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="2" ng-model="specification" maxlength="250"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">确认修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+

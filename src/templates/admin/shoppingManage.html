@@ -1,0 +1,221 @@
+<div class="container-fluid">
+
+    <h3>
+        商品列表
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+            <!--<div class="row">-->
+            <!--<div class="col-md-2" style="margin-bottom: 8px;">-->
+            <!--<a type="button" class="btn btn-default btn-sm" ui-sref="account.create">添加用户</a>-->
+            <!--</div>-->
+            <!--<div  class="col-md-4" style="float: right;" >-->
+            <!--<form class="form-inline">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">-->
+            <!--</div>-->
+            <!--<button type="submit" class="btn btn-info">搜索页面</button>-->
+            <!--</form>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: right;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="addShopping">新增商品</a>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <select class="form-control" style="width: 120px" min='0' ng-model="category" ng-options="category.categoryName for category in currentCategoryList track by category.id">
+                                <option value="">类别</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputAmount" ng-model="product.name" placeholder="按名称搜索">
+                        <button type="submit" class="btn btn-info" style="margin-left: 5px;" ng-click="getPageData(false)">搜索商品</button>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;" ng-click="sortId(2)"><a href="javascript:;"><strong>编号</strong></a></th>
+                    <th style="text-align:center;" ng-click="sortName(2)"><a href="javascript:;"><strong>商品名称</strong></a></th>
+                    <th style="text-align:center;">类别</th>
+                    <th style="text-align:center;">价格</th>
+                    <th style="text-align:center;" ng-show="(flag2 == 1) ? true : false">积分</th>
+                    <th style="text-align:center;">优惠商品</th>
+                    <th style="text-align:center;">库存</th>
+                    <th style="text-align:center;">售卖时间</th>
+                    <th style="text-align:center;">修改</th>
+                    <!--<th style="text-align:center;">删除</th>-->
+                    <th style="text-align:center;">上/下架</th>
+                    <th style="text-align:center;">生成链接</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="product in currentShoppingList track by $index">
+                    <td align="center">{{product.id}}</td>
+                    <td align="center">
+                        <a ui-sref="shoppingUpdate({productId:product.id})" ng-click="goDetail()">{{product.name}}
+                        </a>
+                    </td>
+                    <td align="center">{{product.category.categoryName}}</td>
+                    <td align="center">{{product.marketPrice}}</td>
+                    <td align="center" ng-show="(flag2 == 1) ? true : false">{{product.point}}</td>
+                    <td align="center">{{product.isFav == 'true' ? '是' : '否'}}</td>
+                    <td align="center">{{product.amount}}</td>
+                    <td align="center">{{product.startTime}}~{{product.endTime}}</td>
+                    <td align="center"><a type="button"  ui-sref="shoppingUpdate({productId:product.id})" class="btn btn-info btn-sm">修改</a></td>
+                    <!--<td align="center">-->
+                        <!--<a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteProduct(product.id)" data-target="#deleteProduct">删除</a>-->
+                    <!--</td>-->
+                    <td align="center" ng-show="product.isMarketable == 'true'">
+                        <a type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                           ng-click="setDeleteAccount(product.id)" data-target="#deleteShopping">
+                            <i class="glyphicon glyphicon-arrow-down"></i>
+                            下架
+                        </a></td>
+                    <td align="center" ng-hide="product.isMarketable == 'true'">
+                        <a type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                           ng-click="setAddAccount(product.id)" data-target="#addShopping">
+                            <i class="glyphicon glyphicon-arrow-up"></i>上架</a></td>
+                    <td align="center" width="220px;">
+                        <a type="button" id="showthisButton" ng-click="setLinkAccount(product.id);setLink();product.disableLink=false" ng-show="product.disableLink" class="btn btn-info btn-sm">商品链接</a>
+                        <input ng-hide="product.disableLink" class="form-control" ng-model="product.link" type="text" style="text-align: center;">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{totalCount}}个商品</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!--<nav class="pull-right">-->
+        <!--<ul class="pagination pagination-sm">-->
+        <!--<li>-->
+        <!--<a ng-click="setCurrentPage(1)" href="javascript:;" aria-label="Previous"><span aria-hidden="true">«</span></a>-->
+        <!--</li>-->
+        <!--<li  ng-repeat="n in [] | range:pageNum" ng-class="{active:isCurrentPage($index+1)}">-->
+        <!--<a ng-click="setCurrentPage($index+1)"-->
+        <!--href="javascript:;" aria-label="Previous"><span aria-hidden="true">{{$index+1}}</span></a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a ng-click="setCurrentPage(pageNum)" href="javascript:;" aria-label="Next"><span aria-hidden="true">»</span></a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</nav>-->
+
+    </div>
+    <div class="modal fade" id="deleteShopping" tabindex="-1" role="dialog" aria-labelledby="deleteShopping" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要下架此商品么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteShopping()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addShopping" tabindex="-1" role="dialog" aria-labelledby="deleteShopping" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要上架此商品么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="addShopping()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProduct" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="productDelete">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此件商品么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteProduct()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteMembers"  tabindex="-1" role="dialog" aria-labelledby="deleteMembers" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确认删除</h4>
+                </div>
+                <div class="modal-body" ng-show="hasDeleteAccounts == true">
+                    您确认要删除这些商品么？
+                </div>
+                <div class="modal-body" ng-show="hasDeleteAccounts == false">
+                    请先选择要操作的商品！
+                </div>
+                <div class="modal-footer" >
+                    <button ng-show="hasDeleteAccounts == true" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-show="hasDeleteAccounts == true" ng-click="deleteMembers()" class="btn btn-default" data-dismiss="modal">确定</button>
+                    <button ng-show="hasDeleteAccounts == false" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+    <h3>
+        优惠券统计
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">优惠券名称</th>
+                    <th style="text-align:center;">发券数量</th>
+                    <th style="text-align:center;">领用数量</th>
+                    <th style="text-align:center;">使用数量</th>
+                    <th style="text-align:center;">开始时间</th>
+                    <th style="text-align:center;">结束时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="coupon in currentCouponList track by $index">
+                    <td align="center">{{coupon.name}}</td>
+                    <td align="center">{{coupon.amount}}</td>
+                    <td align="center">{{coupon.count}}</td>
+                    <td align="center">{{coupon.used}}</td>
+                    <td align="center">{{coupon.startDate}}</td>
+                    <td align="center">{{coupon.endDate}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{totalCount}}种优惠券</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+

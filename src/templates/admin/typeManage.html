@@ -1,0 +1,116 @@
+<div class="container-fluid">
+
+    <h3>
+        分类管理
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div style="height: 340px;">
+
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: right;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" data-toggle="modal" data-target="#addFollowSalesman">新增分类</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;" width="25%">类别名称</th>
+                    <th style="text-align:center;" width="25%">是否显示</th>
+                    <th style="text-align:center;" width="25%">修改</th>
+                    <th style="text-align:center;" width="25%">删除</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="category in currentCategoryList track by $index">
+                    <td><input class="form-control" type="text" style="text-align: center;" min='0' ng-disabled="disableTypeManage" ng-model="category.categoryName"/>
+                    </td>
+                    <td align="center">
+                        <form>
+                            <label class="radio-inline">
+                                <input type="radio" value="true" ng-model="category.isShow"/> 是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="false" ng-model="category.isShow"/> 否
+                            </label>
+                        </form>
+
+                    </td>
+                    <td align="center"><button class="btn btn-info" ng-click="disableTypeManage=false" ng-show="disableTypeManage">修改</button>
+                        <button class="btn btn-success" data-toggle="modal" ng-click="disableTypeManage=true;update(category.categoryName,category.id,category.isShow,category.sort)" ng-hide="disableTypeManage">
+                            保存
+                        </button></td>
+                    <td align="center"><button class="btn btn-danger" data-toggle="modal" style="margin-left: 10px;" ng-click="setDeleteType(category.id)" data-target="#deleteType">
+                        删除
+                    </button></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="addFollowSalesman" tabindex="-1" role="dialog" aria-labelledby="addFollowSalesman" aria-hidden="true" name="addFollow">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="addFollow">新增分类</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="form-group" style="height: 50px;">
+                                    <label for="new-followSalesman" class="col-sm-4">输入类别名称</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="new-followSalesman" ng-model="data.categoryName" placeholder="请输入类别名称" required>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="height: 50px;margin-top:10px;">
+                                    <label for="new-followSalesman" class="col-sm-4">是否显示</label>
+                                    <div class="col-sm-8">
+                                        <form>
+                                            <label class="radio-inline">
+                                                <input type="radio" value="true" ng-model="data.isShow"/> 是
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" value="false" ng-model="data.isShow"/> 否
+                                            </label>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button ng-click="newType()" class="btn btn-success" data-dismiss="modal">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteType" tabindex="-1" role="dialog" aria-labelledby="deleteType" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此分类么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteType()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+    <h3>
+        联系方式设置
+    </h3>
+
+    <div ui-view style="margin-top: 30px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+                <label class="col-sm-1 control-label">电话</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" ng-model="phone" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">在"预定成功"界面显示</label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="saveSetting()" class="btn btn-info">保存</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

@@ -1,0 +1,229 @@
+<div class="container-fluid">
+
+    <h3>
+        会议室订单
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+                    <!--<label>从：</label>-->
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="form-group" style="margin-left: -15px;">
+                            <p class="input-group">
+                                <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="status.openedStart"
+                                       max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                              <span class="input-group-btn">
+                                <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                        <div class="form-group" style="margin-left: 10px;margin-bottom: 10px;">
+                            <button type="submit" class="btn btn-info" ng-click="getPageData()">&nbsp;&nbsp;查询&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;"></th>
+                    <th style="text-align:center;" ng-repeat="time in timeList track by $index">{{time.name}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="meeting in currentMeetingList track by $index">
+                    <td align="center">
+                        {{meeting.name}}
+                    </td>
+                    <td align="center"  ng-repeat="time in timeList track by $index"
+                        ng-class="{'greyText' : _.includes($parent.meeting.allTimeList,time.id)}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered" style="margin-top:100px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">订单号</th>
+                    <th style="text-align:center;">预订日期</th>
+                    <!--<th style="text-align:center;">预订时间</th>-->
+                    <th style="text-align:center;">预订会议室</th>
+                    <th style="text-align:center;">金额</th>
+                    <th style="text-align:center;">联系电话</th>
+                    <th style="text-align:center;">下单时间</th>
+                    <th style="text-align:center;">订单状态</th>
+                    <th style="text-align:center;">支付方式</th>
+                    <th style="text-align:center;">支付状态</th>
+                    <th style="text-align:center;" width="200px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in currentOrderList track by $index">
+                    <td align="center">
+                        <a ui-sref="meetingOrderDetail({orderId:order.id})" href="javascript:;">{{order.orderSn}}
+                        </a>
+                    </td>
+                    <td align="center">{{order.meetingDate| date:'yyyy-MM-dd'}}</td>
+                    <!--<td align="center">{{order.meetingtime}}</td>-->
+                    <td align="center">{{order.roomName}}</td>
+                    <td align="center">￥{{order.payAmount}}</td>
+                    <td align="center">{{order.mobile}}</td>
+                    <td align="center">{{order.createdDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td align="center">{{order.orderStatus == "0" ? '未处理' : (order.orderStatus == "1" ? '已处理' : '已取消')}}</td>
+                    <td align="center">{{order.payType == "false" ? '一卡通' : '现金'}}</td>
+                    <td align="center"
+                        ng-class="{'redText' : (order.payStatus == 'false')}">
+                        {{(order.payStatus == "true")  ? '已支付' : '未支付'}}
+                    </td>
+                    <td align="center">
+                        <a type="button" class="btn btn-success btn-sm" ng-class="{disabled:((order.orderStatus == '0') ? false : true)}" ng-click="setHandle(order.id);" data-toggle="modal" data-target="#orderHandle" ng-hide="((order.orderStatus == '1') ? true : false)">处理</a>
+                        <a type="button" class="btn btn-success btn-sm" ng-class="{disabled:true}" ng-show="((order.orderStatus == '1') ? true : false)">
+                            已处理
+                        </a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:(((order.payStatus != 'true' && order.payType == 'false') || order.orderStatus == '0' || order.orderStatus == '2') ? true : false)}" data-toggle="modal" ng-click="setPaidAccount(order.id,order.paySn)" data-target="#orderPaid" ng-hide="(order.payStatus == 'true')">支付</a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:true}" ng-show="(order.payStatus == 'true')">
+                            已支付
+                        </a>
+                        <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteAccount(order.id,order.paySn)" data-target="#orderCancel" ng-show="(((order.orderStatus != '2') && (order.payType == 'false') && (order.payStatus == 'true')) ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteAccount(order.id,order.paySn)" data-target="#moneyCancel" ng-show="(((order.orderStatus != '2') && (order.payStatus == 'true') && (order.payType == 'true')) ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteAccount(order.id,order.paySn)" data-target="#unPaidCancel" ng-show="(((order.orderStatus != '2') && (order.payStatus == 'false')) ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:true}" ng-show="((order.orderStatus == '2') ? true : false)">
+                            已取消
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <!--<div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">-->
+            <!--<p >{{totalCount}}个商品</p>-->
+            <!--</div>-->
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="orderHandle" tabindex="-1" role="dialog" aria-labelledby="orderHandle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="handleModal">确认处理</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要处理此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="handle();" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderPaid" tabindex="-1" role="dialog" aria-labelledby="orderPaid" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="paidModal">确认支付</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要支付此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderPay();" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderCancel" tabindex="-1" role="dialog" aria-labelledby="orderCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="cancelModal">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单并退款给客户么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel();" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="moneyCancel" tabindex="-1" role="dialog" aria-labelledby="moneyCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="money">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单并已线下退款给客户？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="unPaidCancel" tabindex="-1" role="dialog" aria-labelledby="unPaidCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="unPaid">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel();" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

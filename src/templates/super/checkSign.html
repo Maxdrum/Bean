@@ -1,0 +1,33 @@
+<div class="container-fluid">
+
+    <h3>
+        活动报名
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div id="exportable">
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">会员姓名</th>
+                    <th style="text-align:center;">联系方式</th>
+                    <th style="text-align:center;">报名时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="sign in currentSignList track by $index">
+                    <td align="center">{{sign.userName}}</td>
+                    <td align="center">{{sign.mobile}}</td>
+                    <td align="center">{{sign.createdDate| date:'yyyy-MM-dd'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button type="submit" ng-click="export()" class="btn btn-info">导出Excel</button>
+
+    </div>
+
+</div>
+

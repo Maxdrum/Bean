@@ -1,0 +1,179 @@
+<div class="container-fluid">
+
+    <h3>
+        订单详情
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+            <form class="form-horizontal" name="updateForm">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">订&nbsp;&nbsp;单&nbsp;&nbsp;号</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{orderSn}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">收&nbsp;&nbsp;货&nbsp;&nbsp;人</label>
+                    <div class="col-sm-2">
+                        <p class="form-control-static">{{receiver}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{phone}}</p>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">收货地址</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{address}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="(flag2 == 0) ? true : false">
+                    <label class="col-sm-2 control-label">订单总价</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">￥{{totalPrice}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="(flag2 == 1) ? true : false">
+                    <label class="col-sm-2 control-label">支付现金</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">￥{{totalPrice}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="(flag2 == 1) ? true : false">
+                    <label class="col-sm-2 control-label">支付积分</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{point}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">运费价格</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">￥{{shippingPrice}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">支付方式</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{paymentMethod}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">商&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品</label>
+                    <div class="col-sm-6">
+                        <table class="table table-bordered" style="margin-top:20px;">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center;" width="15%">名称</th>
+                                <th style="text-align:center;" width="15%">单价(元)</th>
+                                <th style="text-align:center;" width="15%">数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="pills in orderOne.orderpills track by $index">
+                                <td align="center">{{pills.productName}}</td>
+                                <td align="center">￥{{pills.unitPrice}}</td>
+                                <td align="center">{{pills.quantity}}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                    <!--<label class="col-sm-2 control-label">下单时间</label>-->
+                    <!--<div class="col-sm-6">-->
+                        <!--<p class="form-control-static">{{createDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">下单时间</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{createDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">付款时间</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{paidTime| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">完成/取消时间</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{modifyDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                    </div>
+                </div>
+
+                <button ng-if="(orderStatus == '未处理')" type="button" class="btn btn-info" style="margin-left: 170px;"  ng-click="handle()">处理订单</button>
+
+                <button ng-if="(orderStatus == '未处理' && flag2 == 0)" type="button" class="btn btn-danger"  data-toggle="modal" ng-click="setDeleteAccount()" data-target="#deleteMember">取消订单</button>
+                <button ng-if="(orderStatus == '未处理' && flag2 == 1)" type="button" class="btn btn-danger"  data-toggle="modal" ng-click="setDeleteAccount()" data-target="#orderCancel">取消订单</button>
+				<a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回订单列表</a>
+            </form>
+			<br/><br/><br/><br/>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="deleteMember" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel();payRefund()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderCancel" tabindex="-1" role="dialog" aria-labelledby="orderCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="order">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel();payRefund()" class="btn btn-default" data-dismiss="modal">返还现金</button>
+                    <button ng-click="orderCancel();payRefund()" class="btn btn-default" data-dismiss="modal">返还现金和积分</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

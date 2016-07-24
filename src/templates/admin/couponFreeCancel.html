@@ -1,0 +1,30 @@
+<div class="container-fluid">
+
+    <h3>
+        核销免赠券
+    </h3>
+
+    <div ui-view style="margin-top: 30px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="cancelForm">
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">核销序列号</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="serialNum" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <button type="submit" ng-disabled="cancelForm.$invalid" ng-click="cancel()" class="btn btn-info">提交核销</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

@@ -1,0 +1,87 @@
+<div class="container-fluid">
+
+    <h3>
+        优惠券列表
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">优惠券名称</th>
+                    <th style="text-align:center;">优惠券类型</th>
+                    <th style="text-align:center;">开始时间</th>
+                    <th style="text-align:center;">结束时间</th>
+                    <th style="text-align:center;">优惠券状态</th>
+                    <th style="text-align:center;" width="200px">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="coupon in currentCouponList track by $index">
+                    <td align="center">{{coupon.name}}</td>
+                    <td align="center">{{coupon.type}}</td>
+                    <td align="center">{{coupon.startDate}}</td>
+                    <td align="center">{{coupon.endDate}}</td>
+                    <td align="center">{{coupon.status}}</td>
+                    <td align="center"><a type="button"  ui-sref="couponDetail({couponId:coupon._id})" class="btn btn-info btn-sm">查看</a>
+                        <a type="button"  ui-sref="couponStat({couponId:coupon._id})" class="btn btn-info btn-sm">统计</a>
+                        <a type="button" data-toggle="modal" data-target="#closecoupon" ng-click="setCloseAccount(coupon._id)" class="btn btn-danger btn-sm">关闭</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{totalCount}}种优惠券</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="closecoupon" tabindex="-1" role="dialog" aria-labelledby="closecoupon" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认关闭</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要关闭此优惠券么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="close()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

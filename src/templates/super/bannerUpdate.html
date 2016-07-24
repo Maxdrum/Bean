@@ -1,0 +1,57 @@
+<div class="container-fluid">
+
+    <h3>
+        Banner修改
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 50px;"></div>
+    <div>
+        <form class="form-horizontal" name="updateForm">
+
+            <div class="col-sm-6" style="margin-bottom: 20px;">
+                <img style="margin-left: 10px;width:320px;height:267px;" src="{{image}}" >
+            </div>
+
+            <div class="col-sm-6" ng-show="files[0]" style="margin-bottom: 20px;">
+                <img style="margin-left: 10px;width:320px;height:267px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+            </div>
+
+            <div>
+                <div style="margin-top: 20px;width: 100px;">
+                    <button class="btn btn-info" ng-model="files" ngf-drop ngf-select class="well my-drop-zone btn btn-info" style="margin-bottom:5px;margin-left: 8px;"
+                            ngf-multiple="true" ngf-drag-over-class="file-over-class" accept="image/*"><i class="glyphicon glyphicon-plus"></i>上传图片</button>
+
+                </div>
+            </div>
+
+            <div>
+                <span>
+                    <label style="color: red;margin-left: 600px;margin-top: 10px;">*</label>
+                    <label style="margin-left: 10px;">图片建议宽640px，高534px。</label>
+                </span>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label style="margin-left: 20px;width: 50px;">链接:</label>
+                <label style="width: 400px;">
+                    <input type="text" class="form-control"  ng-model="url" value="" placeholder="必填" required>
+                </label>
+                <label style="color: red;margin-left: 135px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请拷贝店铺列表链接 如"/store/1"</label>
+            </div>
+
+            <div class="form-group" style="margin-top: 40px;">
+                <div style="margin-left: 50px;">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">&nbsp;&nbsp;确认&nbsp;&nbsp;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <h3>系统设置</h3>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{active:isActive('/systemSetting')}"><a ui-sref="systemSetting">积分设置</a></li>
+        <li role="presentation" ng-class="{active:isActive('/phoneSetting')}"><a ui-sref="phoneSetting">联系电话</a></li>
+        <li role="presentation" ng-class="{active:isActive('/signSetting')}"><a ui-sref="signSetting">签到管理</a></li>
+    </ul>
+    <div ui-view style="margin: 20px"></div>
+
+    <div class="row" style="margin-left: 0;">
+
+        <form class="form-inline" name="updateForm" style="margin-top: 40px;">
+
+            <div>
+                <label class="col-sm-1 control-label">联系电话</label>
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="phone" style="margin-left: 5px;" placeholder="必填" required>
+                    </div>
+                    <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                </div>
+            </div>
+
+            <div style="padding-top: 50px;">
+                <label class="col-sm-1 control-label">手&nbsp;&nbsp;机&nbsp;&nbsp;号</label>
+                <div class="col-sm-11">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="mobile" style="margin-left: 5px;" placeholder="必填" required>
+                    </div>
+                    <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                    <label style="margin-left: 10px;">用于接收会议室、商务策划及投融资订单消息</label>
+                </div>
+            </div>
+
+        </form>
+
+        <div>
+            <label class="col-sm-1 control-label"></label>
+            <div class="col-sm-11" style="margin-top: 30px;">
+                <div class="form-group">
+                    <button type="submit" ng-disabled="updateForm.$invalid" class="btn btn-info" ng-click="update()">确认修改</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

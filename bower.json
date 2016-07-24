@@ -1,0 +1,22 @@
+{
+  "name": "maui-demo",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.7",
+    "bootstrap": "3.x",
+    "angular-bootstrap": "~0.14.3",
+    "angular-ui-router": "ui-router#~0.2.15",
+    "ng-file-upload": "~11.2.3",
+    "materialize": "~0.97.0",
+    "angular-i18n": "angular/bower-angular-i18n#~1.3.15",
+    "lodash": "~3.6.0",
+    "jquery-validation": "jquery-validate#~1.14.0",
+    "angular-ui-sortable": "angular-ui/ui-sortable#~0.13.4",
+    "angular-drag-and-drop-lists": "marceljuenemann/angular-drag-and-drop-lists#~1.3.0",
+    "jquery-zclip": "~1.1.5",
+    "quill": "~0.20.1",
+    "angular-file-saver": "~1.0.2",
+    "js-xlsx": "~0.8.0"
+  }
+}

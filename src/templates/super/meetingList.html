@@ -1,0 +1,144 @@
+<div class="container-fluid">
+
+    <h3>
+        会议室列表
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: right;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="meetingAdd">新增会议室</a>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <div class="panel-body sort_list">
+
+                <ul dnd-list-header>
+                    <li>
+                        <div class="li-sec" style="width: 40%;">
+                            名称
+                        </div>
+                        <div class="li-sec" style="width: 30%;">
+                            价格
+                        </div>
+                        <div class="li-sec" style="width: 30%;border: none;">
+                            操作
+                        </div>
+                    </li>
+                </ul>
+
+                <ul dnd-list="currentMeetingList">
+
+
+                    <li ng-repeat="meeting in currentMeetingList"
+                        dnd-draggable="meeting"
+                        dnd-type="1"
+                        dnd-moved="currentMeetingList.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        class="background-shop">
+                        <div class="li-sec" style="width: 40%;">
+                            <div class="handle">:::</div>
+                            <div class="name" dnd-nodrag>
+                                {{meeting.name}}
+                            </div>
+                        </div>
+                        <div class="li-sec" style="width: 30%;">
+                            ￥{{meeting.price}}/小时
+                        </div>
+                        <div class="li-sec" style="width: 30%;border: none;">
+                            <a type="button"  ui-sref="meetingUpdate({meetingId:meeting.id})" class="btn btn-info btn-sm">修改</a>
+                            <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" style="margin-left: 10px;"
+                               ng-click="setDeleteAccount(meeting.id)" data-target="#deleteMeeting">删除</a>
+                        </div>
+                    </li>
+
+                    <li class="dndPlaceholder">
+
+                    </li>
+
+                </ul>
+            </div>
+
+
+
+
+
+            <!--<table class="table table-bordered" style="margin-top:20px;">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th style="text-align:center;">名称</th>-->
+                    <!--<th style="text-align:center;">价格</th>-->
+                    <!--<th style="text-align:center;" width="500px">操作</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="meeting in currentMeetingList track by $index">-->
+                    <!--<td align="center">{{meeting.name}}</td>-->
+                    <!--<td align="center">￥{{meeting.price}}/小时</td>-->
+                    <!--<td align="center"><a type="button"  ui-sref="meetingUpdate({meetingId:meeting.id})" class="btn btn-info btn-sm">修改</a>-->
+                        <!--<a type="button" class="btn btn-danger btn-sm" data-toggle="modal" style="margin-left: 10px;"-->
+                           <!--ng-click="setDeleteAccount(meeting.id)" data-target="#deleteMeeting">删除</a>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{total}}间会议室</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteMeeting" tabindex="-1" role="dialog" aria-labelledby="deleteMeeting" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此会议室么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteMeeting()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

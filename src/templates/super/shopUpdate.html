@@ -1,0 +1,221 @@
+<div class="container-fluid">
+
+    <h3>
+        修改店铺
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="updateForm">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店&nbsp;&nbsp;铺&nbsp;&nbsp;名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="storeName" value="" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">建议使用中文、字母、数字</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺图片(微信)</label>
+                <div class="col-sm-6">
+
+                    <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="image/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6">
+                        <img style="margin-left: 10px;width:320px;height:150px;" src="{{image}}" >
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:320px;height:150px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议宽640像素，高300像素。</label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺图片(App)</label>
+                <div class="col-sm-6">
+
+                    <div ngf-drop ngf-select ng-model="files2" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="imageApp/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6">
+                        <img style="margin-left: 10px;width:159px;height:107px;" src="{{imageApp}}" >
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files2[0]">
+                        <img style="margin-left: 10px;width:159px;height:107px;" ngf-src="files2[0]"  ngf-accept="'imageApp/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议宽317像素，高214像素。</label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺状态</label>
+                <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" value="1" ng-model="flag1"/> 开启
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="0" ng-model="flag1"/> 关闭
+                        </label>
+                        <!--<label class="radio-inline">-->
+                            <!--<input type="radio" value="2" ng-model="flag1"/> 暂不营业-->
+                        <!--</label>-->
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">营业状态</label>
+                <div class="col-sm-6">
+                    <label class="radio-inline">
+                        <input type="radio" value="1" disabled ng-model="flag1"/> 营业
+                    </label>
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" value="0" ng-model="flag1"/> 关闭-->
+                    <!--</label>-->
+                    <label class="radio-inline">
+                        <input type="radio" value="2" disabled ng-model="flag1"/> 暂不营业
+                    </label>
+                </div>
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+                <label style="margin-left: 30px;">按营业时间自动计算，不可修改。</label>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">产品数</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control"  ng-model="email" value="">-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联&nbsp;&nbsp;系&nbsp;&nbsp;人</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="contactor" value="" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请填写您的姓名</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系电话</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="telephone" value="" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请填写您的联系方式</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+                <div class="col-sm-6">
+                    <p>{{account}}</p>
+                </div>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">营业时间</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control"  ng-model="worktime" value="" placeholder="必填" required>-->
+                <!--</div>-->
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+                <!--<label style="margin-left: 10px;">例如：8:00am - 9:00pm</label>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="margin-top: 35px;">营业时间</label>
+                <div class="col-sm-6">
+                    <div style="display: inline-block;">
+                        <uib-timepicker ng-model="startDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                    <div style="display: inline-block;position: relative;top: -45px;">
+                        <label style="margin-left: 30px;">~</label>
+                    </div>
+                    <div style="display: inline-block;margin-left: 30px;">
+                        <uib-timepicker ng-model="endDate" hour-step="hstep" minute-step="mstep" show-meridian="false"></uib-timepicker>
+                    </div>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 45px;">*</label>
+                <label style="margin-left: 10px;margin-top: 35px;">例如：8:00 ~ 21:00</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">免配送金额</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control"  ng-model="freight" value="" min=0 placeholder="达到设置金额则免配送费" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">免配送金额为整数</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">配&nbsp;&nbsp;&nbsp;送&nbsp;&nbsp;&nbsp;费</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control"  ng-model="freightfee" value="" min=0 placeholder="未达到免配送金额，则收取配送费" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">配送费为整数</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">打印编号</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="printSn" value="" placeholder="编号9位,在打印机底部贴纸上">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">打印密钥</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="printKey" value="" placeholder="去飞鹅打印机官方网站 www.feieyun.com注册账号,添加打印机编号,自动生成KEY">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">宣&nbsp;&nbsp;传&nbsp;&nbsp;语</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="2"  ng-model="propa" maxlength="40" placeholder="必填" required></textarea>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">20个中文或40个英文字符</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绍</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="4" ng-model="introduce"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="updateForm.$invalid" ng-click="update()" class="btn btn-info">确认修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

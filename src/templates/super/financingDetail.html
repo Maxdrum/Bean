@@ -1,0 +1,146 @@
+<div class="container-fluid">
+
+    <h3>
+        融资详情
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+            <form class="form-horizontal" name="updateForm">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">融资信息</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{orderSn}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务类型</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{title}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">订单状态</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{orderstatus}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{contactor}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{phone}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司名称</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{company}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司地址</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{address}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">项目名称</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{note}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">项目介绍</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{project}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">下单时间</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{createDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">付款时间</label>-->
+                <!--<div class="col-sm-6">-->
+                <!--<p class="form-control-static">{{paidTime| date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">完成/取消时间</label>-->
+                <!--<div class="col-sm-6">-->
+                <!--<p class="form-control-static">{{modifyDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <button ng-if="(orderstatus == '未处理')" type="button" class="btn btn-info" style="margin-left: 170px;" data-toggle="modal"  ng-click="setHandleAccount()" data-target="#orderHandle">处理</button>
+
+                <button ng-if="(orderstatus == '未处理')" type="button" class="btn btn-danger"  data-toggle="modal" ng-click="setDeleteAccount()" data-target="#deleteMember">取消</button>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="deleteMember" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderHandle" tabindex="-1" role="dialog" aria-labelledby="orderHandle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="order">确认处理</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要处理此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="handle()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

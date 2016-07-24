@@ -1,0 +1,76 @@
+<div class="container-fluid">
+
+    <h3>
+        新增会议室
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会议室名称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="name" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" ng-model="price" min="0" placeholder="必填" required>
+                </div>
+                <label style="margin-left: 10px;">元/小时</label>
+                <label style="color: red;margin-left: 5px;margin-top: 5px;">*</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="subtitle" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="descr" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会议室图片</label>
+                <div class="col-sm-6">
+                    <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="image/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:320px;height:200px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议宽640像素，高400像素</label>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="saveMeeting()" class="btn btn-info">提交</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

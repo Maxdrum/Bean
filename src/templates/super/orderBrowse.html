@@ -1,0 +1,124 @@
+<div class="container-fluid">
+
+    <h3>
+        订单浏览
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="updateForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店&nbsp;&nbsp;铺&nbsp;&nbsp;名</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{storeName}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">订&nbsp;&nbsp;单&nbsp;&nbsp;号</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{orderSn}}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">收&nbsp;&nbsp;货&nbsp;&nbsp;人</label>
+                <div class="col-sm-2">
+                    <p class="form-control-static">{{receiver}}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系电话</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{phone}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">收货地址</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{address}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">订单总价</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">￥{{totalPrice}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">运费价格</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">￥{{shippingPrice}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">支付方式</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{paymentMethod}}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">商&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品</label>
+                <div class="col-sm-6">
+                    <table class="table table-bordered" style="margin-top:20px;">
+                        <thead>
+                        <tr>
+                            <th style="text-align:center;" width="15%">名称</th>
+                            <th style="text-align:center;" width="15%">单价(元)</th>
+                            <th style="text-align:center;" width="15%">数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="pills in orderOne.orderpills track by $index">
+                            <td align="center">{{pills.productName}}</td>
+                            <td align="center">￥{{pills.unitPrice}}</td>
+                            <td align="center">{{pills.quantity}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">下单时间</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{createDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">付款时间</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{paidTime| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">完成/取消时间</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">{{modifyDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

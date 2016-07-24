@@ -1,0 +1,96 @@
+<div class="left-panel" ng-style="{'width':leftWidth}" ng-controller="LeftPanelController">
+    <div class="menu-container">
+        <ul class="left_menu_module">
+
+            <li>
+                <a class="left_menu_item" ng-class="{active:isActive('/orderManage')}"  ui-sref="orderManage">
+                    <i class="glyphicon glyphicon-list-alt" title="物业订单"></i>
+                <span class="collapse_hide" ng-show="leftShow == true">
+                    物业订单
+                </span>
+                </a>
+            </li>
+            <li>
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="物业分类"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    物业分类
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/typeManage')}" ui-sref="typeManage">
+                            分类管理
+                        </a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a class="left_menu_item" ng-class="{active:isActive('/typePicture')}" ui-sref="typePicture">-->
+                            <!--分类图片-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/propertyAdd')}" ui-sref="propertyAdd">
+                            分类新增
+                        </a>
+                    </li>
+                </div>
+
+            </ul>
+            <!--<li>-->
+                <!--<a class="left_menu_item" ng-class="{active:isActive('/propertyAdd')}"  ui-sref="propertyAdd">-->
+                    <!--<i class="glyphicon glyphicon-plus" title="新增物业"></i>-->
+                <!--<span class="collapse_hide" ng-show="leftShow == true">-->
+                    <!--新增物业-->
+                <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
+
+            <li>
+                <a class="left_menu_item" ng-class="{active:isActive('/propertySetting')}"  ui-sref="propertySetting">
+                    <i class="glyphicon glyphicon-cog" title="物业设置"></i>
+                <span class="collapse_hide" ng-show="leftShow == true">
+                    物业设置
+                </span>
+                </a>
+            </li>
+
+        </ul>
+        <div class="hr_black" ></div>
+    </div>
+    <!--<ul class="left_menu_footer"  ng-show="leftShow == true">-->
+        <!--<div class="hr_black" ></div>-->
+        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="/webapp/#/help" target="_blank">&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="glyphicon glyphicon-question-sign"></i>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li >&ndash;&gt;-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="hide_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-backward" style="margin-left: 80px;"></i>-->
+            <!--</a>-->
+
+        <!--</li >-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="hide_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-backward" style="margin-left: 80px;"></i>-->
+            <!--</a>-->
+        <!--</li>-->
+
+    </ul>
+
+        <!--</li>-->
+
+    <!--</ul>-->
+
+    <!--<ul class="left_menu_footer" ng-show="leftShow == false">-->
+        <!--<div class="hr_black" ></div>-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="show_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-forward" style="margin-left: 5px;" title="展开"></i>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>上投盛银大厦</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    <link rel="stylesheet" href="css/superApp.min.css" />
+    <link rel="stylesheet" href="css/lib.min.css" />
+    <!-- inject:js -->
+    <script src="js/superLib.min.js"></script>
+    <script>
+        var X_context = {
+            ver : "v1.0",
+            storeId : "1",
+            authorization : "165fbb46124e1dc450a15e8d1660775088183693bf66efa03e140c8f60549ecf"
+        }
+    </script>
+    <script src="js/superApp.min.js"></script>
+
+
+</head>
+<body ng-app="ZJSY_SuperAdmin" ng-controller="SuperMainController">
+
+<div ng-include="'navBarSuper.html'"></div>
+<div>
+    <alerts></alerts>
+</div>
+<div class="contain-fluid main">
+    <div ng-include="'sideBarSuper.html'"></div>
+    <div class="center-panel" ng-style="{'margin-left':leftWidth}">
+        <div ui-view=""></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<div class="left-panel" ng-style="{'width':leftWidth}" ng-controller="LeftPanelController">
+    <div class="menu-container">
+        <ul class="left_menu_module">
+            <li>
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="商品管理"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    商品管理
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                <li>
+                    <a class="left_menu_item" ng-class="{active:isActive('/addShopping')}" ui-sref="addShopping">
+                        新增商品
+                    </a>
+                </li>
+                <li>
+                    <a class="left_menu_item" ng-class="{active:isActive('/shoppingManage')}" ui-sref="shoppingManage">
+                        商品列表
+                    </a>
+                </li>
+                </div>
+            </ul>
+
+            <!--<li>-->
+                <!--<a class="left_menu_item" ng-class="{active:isActive('/addShopping')}" ui-sref="addShopping">-->
+                    <!--<i class="glyphicon glyphicon-plus" title="新增商品"></i>-->
+                <!--<span class="collapse_hide" ng-show="leftShow == true">-->
+                    <!--新增商品-->
+                <!--</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <li>
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="分类管理"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    分类管理
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/typeAdd')}" ui-sref="typeAdd">
+                            新增分类
+                        </a>
+                    </li>
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/typeManage')}" ui-sref="typeManage">
+                            分类管理
+                        </a>
+                    </li>
+                </div>
+            </ul>
+
+            <li>
+                <a class="left_menu_item" ng-class="{active:isActive('/orderManage')}"  ui-sref="orderManage">
+                    <i class="glyphicon glyphicon-list-alt" title="订单管理"></i>
+                <span class="collapse_hide" ng-show="leftShow == true">
+                    订单管理
+                </span>
+                </a>
+            </li>
+
+            <li>
+                <a class="left_menu_item" ng-class="{active:isActive('/shopAnnouncement')}"  ui-sref="shopAnnouncement">
+                    <i class="glyphicon glyphicon-volume-up" title="店铺公告"></i>
+                <span class="collapse_hide" ng-show="leftShow == true">
+                    店铺公告
+                </span>
+                </a>
+            </li>
+            <li>
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="一卡通"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    一卡通
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/cardBinding')}" ui-sref="cardBinding">
+                            绑定卡
+                        </a>
+                    </li>
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/card')}" ui-sref="card">
+                            交易流水
+                        </a>
+                    </li>
+                </div>
+
+            </ul>
+            <li>
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="Banner广告"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    Banner广告
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/advertisementManage')}" ui-sref="advertisementManage">
+                            广告管理
+                        </a>
+                    </li>
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/advertisementAdd')}" ui-sref="advertisementAdd">
+                            广告新增
+                        </a>
+                    </li>
+                </div>
+
+            </ul>
+
+            <li ng-show="(flag2 == 0) ? true : false">
+                <a class="left_menu_item">
+                    <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="优惠券管理"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    优惠券管理
+                </span>
+                </a>
+            </li>
+            <ul class="submenu">
+                <div class="expand-triangle">
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/couponList')}" ui-sref="couponList">
+                            优惠券列表
+                        </a>
+                    </li>
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/couponCount')}" ui-sref="couponCount">
+                            优惠券统计
+                        </a>
+                    </li>
+
+                <li>
+                    <a class="left_menu_item">
+                        <i class="glyphicon glyphicon-triangle-right" style="cursor: pointer" title="新增优惠券"></i>
+                <span class="collapse_hide" style="cursor: pointer" ng-show="leftShow == true">
+                    新增优惠券
+                </span>
+                    </a>
+                </li>
+                <ul class="submenu">
+                    <div class="expand-triangle">
+                        <li>
+                            <a class="left_menu_item" ng-class="{active:isActive('/couponFree')}" ui-sref="couponFree">
+                                免赠券
+                            </a>
+                        </li>
+                        <li>
+                            <a class="left_menu_item" ng-class="{active:isActive('/couponFull')}" ui-sref="couponFull">
+                                满赠券
+                            </a>
+                        </li>
+                        <li>
+                            <a class="left_menu_item" ng-class="{active:isActive('/couponCash')}" ui-sref="couponCash">
+                                抵用券
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+                    <li>
+                        <a class="left_menu_item" ng-class="{active:isActive('/couponFreeCancel')}" ui-sref="couponFreeCancel">
+                            核销免赠券
+                        </a>
+                    </li>
+
+                </div>
+            </ul>
+            <li>
+                <a class="left_menu_item" ng-class="{active:isActive('/systemSetting')}"  ui-sref="systemSetting">
+                    <i class="glyphicon glyphicon-cog" title="系统设置"></i>
+                <span class="collapse_hide" ng-show="leftShow == true">
+                    系统设置
+                </span>
+                </a>
+            </li>
+
+        </ul>
+        <div class="hr_black" ></div>
+    </div>
+    <!--<ul class="left_menu_footer"  ng-show="leftShow == true">-->
+        <!--<div class="hr_black" ></div>-->
+        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="/webapp/#/help" target="_blank">&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="glyphicon glyphicon-question-sign"></i>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li >&ndash;&gt;-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="hide_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-backward" style="margin-left: 80px;"></i>-->
+            <!--</a>-->
+
+        <!--</li >-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="hide_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-backward" style="margin-left: 80px;"></i>-->
+            <!--</a>-->
+        <!--</li>-->
+
+    </ul>
+
+        <!--</li>-->
+
+    <!--</ul>-->
+
+    <!--<ul class="left_menu_footer" ng-show="leftShow == false">-->
+        <!--<div class="hr_black" ></div>-->
+        <!--<li>-->
+            <!--<a href="javascript:;" ng-click="show_left_panel()">-->
+                <!--<i class="glyphicon glyphicon-step-forward" style="margin-left: 5px;" title="展开"></i>-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+</div>

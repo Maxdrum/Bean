@@ -1,0 +1,207 @@
+<div class="container-fluid">
+
+    <h3>
+        新增企业秀
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="title" maxlength="25" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">显示25个字符,一个中文占两字符</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">副&nbsp;&nbsp;标&nbsp;&nbsp;题</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="subtitle" maxlength="25" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">显示25个字符,一个中文占两字符</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">列表图片</label>
+                <div class="col-sm-6">
+                    <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="image/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:50px;height:50px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">显示在最新活动顶部 100px*100px</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="margin-top: 10px;">banner图片</label>
+                <div class="col-sm-6">
+
+                    <div class="checkbox col-xs-2" style="display: inline-block;margin-top: 10px;">
+                        <label>
+                            <input type="checkbox" value="0" ng-model="showBanner"/>
+                            显示
+                        </label>
+                    </div>
+
+                    <div style="display: inline-block;padding: 0 0 0 5px;" class="col-xs-10">
+                        <div ngf-drop ngf-select ng-model="files2" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                             ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                             accept="image/*">点击上传图片
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6" ng-show="files2[0]">
+                        <img style="margin-left: 10px;width:320px;height:120px;" ngf-src="files2[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">显示在最新活动顶部 640px*240px 勾选显示</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-6">
+                    <div id="content-container" class="activity-quill">
+                        <div id="formatting-container"><span class="ql-format-group">
+                  <select title="Font" class="ql-font" style="display: none;">
+                      <option value="sans-serif" selected>Sans Serif</option>
+                      <option value="Georgia, serif">Serif</option>
+                      <option value="Monaco, 'Courier New', monospace">Monospace</option>
+                  </select>
+                  <select title="Size" class="ql-size">
+                      <option value="10px">小</option>
+                      <option value="13px" selected>中</option>
+                      <option value="18px">大</option>
+                      <option value="32px">巨</option>
+                  </select></span><span class="ql-format-group"><span title="Bold" class="ql-format-button ql-bold"></span><span class="ql-format-separator"></span><span title="Italic" class="ql-format-button ql-italic"></span><span class="ql-format-separator"></span><span title="Underline" class="ql-format-button ql-underline"></span><span class="ql-format-separator"></span><span title="Strikethrough" class="ql-format-button ql-strike"></span></span><span class="ql-format-group">
+                  <select title="Text Color" class="ql-color">
+                      <option value="rgb(0, 0, 0)" selected></option>
+                      <option value="rgb(230, 0, 0)"></option>
+                      <option value="rgb(255, 153, 0)"></option>
+                      <option value="rgb(255, 255, 0)"></option>
+                      <option value="rgb(0, 138, 0)"></option>
+                      <option value="rgb(0, 102, 204)"></option>
+                      <option value="rgb(153, 51, 255)"></option>
+                      <option value="rgb(255, 255, 255)"></option>
+                      <option value="rgb(250, 204, 204)"></option>
+                      <option value="rgb(255, 235, 204)"></option>
+                      <option value="rgb(255, 255, 204)"></option>
+                      <option value="rgb(204, 232, 204)"></option>
+                      <option value="rgb(204, 224, 245)"></option>
+                      <option value="rgb(235, 214, 255)"></option>
+                      <option value="rgb(187, 187, 187)"></option>
+                      <option value="rgb(240, 102, 102)"></option>
+                      <option value="rgb(255, 194, 102)"></option>
+                      <option value="rgb(255, 255, 102)"></option>
+                      <option value="rgb(102, 185, 102)"></option>
+                      <option value="rgb(102, 163, 224)"></option>
+                      <option value="rgb(194, 133, 255)"></option>
+                      <option value="rgb(136, 136, 136)"></option>
+                      <option value="rgb(161, 0, 0)"></option>
+                      <option value="rgb(178, 107, 0)"></option>
+                      <option value="rgb(178, 178, 0)"></option>
+                      <option value="rgb(0, 97, 0)"></option>
+                      <option value="rgb(0, 71, 178)"></option>
+                      <option value="rgb(107, 36, 178)"></option>
+                      <option value="rgb(68, 68, 68)"></option>
+                      <option value="rgb(92, 0, 0)"></option>
+                      <option value="rgb(102, 61, 0)"></option>
+                      <option value="rgb(102, 102, 0)"></option>
+                      <option value="rgb(0, 55, 0)"></option>
+                      <option value="rgb(0, 41, 102)"></option>
+                      <option value="rgb(61, 20, 102)"></option>
+                  </select><span class="ql-format-separator"></span>
+                  <select title="Background Color" class="ql-background">
+                      <option value="rgb(0, 0, 0)"></option>
+                      <option value="rgb(230, 0, 0)"></option>
+                      <option value="rgb(255, 153, 0)"></option>
+                      <option value="rgb(255, 255, 0)"></option>
+                      <option value="rgb(0, 138, 0)"></option>
+                      <option value="rgb(0, 102, 204)"></option>
+                      <option value="rgb(153, 51, 255)"></option>
+                      <option value="rgb(255, 255, 255)" selected></option>
+                      <option value="rgb(250, 204, 204)"></option>
+                      <option value="rgb(255, 235, 204)"></option>
+                      <option value="rgb(255, 255, 204)"></option>
+                      <option value="rgb(204, 232, 204)"></option>
+                      <option value="rgb(204, 224, 245)"></option>
+                      <option value="rgb(235, 214, 255)"></option>
+                      <option value="rgb(187, 187, 187)"></option>
+                      <option value="rgb(240, 102, 102)"></option>
+                      <option value="rgb(255, 194, 102)"></option>
+                      <option value="rgb(255, 255, 102)"></option>
+                      <option value="rgb(102, 185, 102)"></option>
+                      <option value="rgb(102, 163, 224)"></option>
+                      <option value="rgb(194, 133, 255)"></option>
+                      <option value="rgb(136, 136, 136)"></option>
+                      <option value="rgb(161, 0, 0)"></option>
+                      <option value="rgb(178, 107, 0)"></option>
+                      <option value="rgb(178, 178, 0)"></option>
+                      <option value="rgb(0, 97, 0)"></option>
+                      <option value="rgb(0, 71, 178)"></option>
+                      <option value="rgb(107, 36, 178)"></option>
+                      <option value="rgb(68, 68, 68)"></option>
+                      <option value="rgb(92, 0, 0)"></option>
+                      <option value="rgb(102, 61, 0)"></option>
+                      <option value="rgb(102, 102, 0)"></option>
+                      <option value="rgb(0, 55, 0)"></option>
+                      <option value="rgb(0, 41, 102)"></option>
+                      <option value="rgb(61, 20, 102)"></option>
+                  </select></span><span class="ql-format-group"><span title="Bullet" class="ql-format-button ql-bullet"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span><span class="ql-format-separator"></span>
+                  <select title="Text Alignment" class="ql-align">
+                      <option value="left" selected></option>
+                      <option value="center"></option>
+                      <option value="right"></option>
+                      <option value="justify"></option>
+                  </select></span>
+                    <span class="ql-format-group">
+                        <span title="Link" class="ql-format-button ql-link"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Image" class="ql-format-button ql-image"></span>
+                        <span class="ql-format-separator"></span>
+                        <div title="上传" class="ql-format-button"
+                             ngf-select ng-model="innerFile" ngf-multiple="false" accept="image/*">
+                            <i class="glyphicon glyphicon-cloud-upload" title="本地图片上传"></i>
+                        </div>
+                        <span class="ql-format-separator"></span>
+                    </span>
+                        </div>
+                        <div id="editor-container">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 50px;">*</label>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="addActivity()" class="btn btn-info">提交</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

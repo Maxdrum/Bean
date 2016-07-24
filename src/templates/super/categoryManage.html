@@ -1,0 +1,63 @@
+<div class="container-fluid">
+
+    <h3>
+        服务分类
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline" >
+
+                    <div  style="float: left;padding-right: 15px;">
+                        <a type="button" class="btn btn-info" ui-sref="categoryAdd">新增分类</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">一级类</th>
+                    <th style="text-align:center;">二级类</th>
+                    <th style="text-align:center;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="type in fifthCategoryList track by $index">
+                <td align="center"><p ng-show="$index == 0">商务策划</p></td>
+                <td align="center">{{type.title}}</td>
+
+                <td align="center"><a type="button"  ui-sref="categoryUpdate({servicesId:type._id})" class="btn btn-info btn-sm">修改</a>
+                <a type="button" style="margin-left: 10px;" class="btn btn-danger btn-sm" ng-click="setDeleteAccount(type._id)" data-toggle="modal" data-target="#deleteType">删除</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteType" tabindex="-1" role="dialog" aria-labelledby="deleteType" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此二级类么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteType()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

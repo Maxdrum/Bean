@@ -1,0 +1,166 @@
+<div class="container-fluid">
+
+    <h3>
+        新增免赠券
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">优&nbsp;惠&nbsp;券&nbsp;名&nbsp;称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="couponName" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">优惠券名称</label>
+            </div>
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</label>
+                <div class="col-sm-6">
+                    <input class="form-control" ng-model="amount" placeholder="必填" type="number" min="1" max="10000" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">建议最大值不超过10000</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠开始时间</label>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="status.openedStart"
+                               max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                              <span class="input-group-btn">
+                                <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                    </p>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠结束时间</label>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="status.openedEnd"
+                               max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                          <span class="input-group-btn">
+                            <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">产&nbsp;&nbsp;品&nbsp;&nbsp;选&nbsp;&nbsp;择</label>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                    <select class="form-control" style="width: 150px" min='0' ng-model="category" ng-options="category.categoryName for category in currentCategoryList track by category.id">
+                        <option value="">类别</option>
+                    </select>
+                    <input type="text" class="form-control" style="margin-left: 20px;width: 200px;" ng-model="name" placeholder="填写商品名" >
+                        <button type="button" class="btn btn-info" style="margin-left: 10px;" ng-click="getPageData(false)">搜索</button>
+                    </p>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <div class="dis">
+                        <table class="table table-bordered" style="width: 250px;">
+                            <thead>
+                            <tr>
+                                <th><input style="margin-right: 5px;" type="checkbox" ng-model="allSelected"/>商品名称</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in currentShoppingList track by $index">
+                                <td><input style="margin-right: 5px;" type="checkbox" ng-model="product.addMark"/>
+                                    {{product.name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                            <div style="display: inline-block;float:left;margin: 20px;padding-top: 150px;">
+                                <div>
+                                    <i class="glyphicon glyphicon-chevron-left" ng-click="deleteProduct()" title="左箭头"></i>
+                                </div>
+                                <div>
+                                    <i class="glyphicon glyphicon-chevron-right" ng-click="addProduct()" title="右箭头"></i>
+                                </div>
+                            </div>
+                        <!--<br/>-->
+                            <!--<div class="displayInline" style="margin-left: -50px;">-->
+                                <!-- -->
+                            <!--</div>-->
+
+                        <table class="table table-bordered" style="width: 250px;">
+                            <thead>
+                            <tr>
+                                <th><input style="margin-right: 5px;" type="checkbox" ng-model="selected"/>选择的商品</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in currentList track by $index">
+                                <td><input style="margin-right: 5px;" type="checkbox" ng-model="product.deleteMark"/>
+                                    {{product.name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-6">
+                    <div style="float: left;padding-left: 15px;">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <nav>
+                                    <ul class="pagination" style="float: right;">
+                                        <li ng-class="{true:'disabled'}[currentPage==1]">
+                                            <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                        <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                            <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="newCoupon()" class="btn btn-info">新增</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

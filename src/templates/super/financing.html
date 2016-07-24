@@ -1,0 +1,121 @@
+<div class="container-fluid">
+
+    <h3>
+        融资订单
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;">融资信息</th>
+                    <th style="text-align:center;">下单时间</th>
+                    <th style="text-align:center;">服务类型</th>
+                    <th style="text-align:center;">订单状态</th>
+                    <th style="text-align:center;">姓名</th>
+                    <th style="text-align:center;">电话</th>
+                    <!--<th style="text-align:center;">地址</th>-->
+                    <th style="text-align:center;" width="150px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in currentOrderList track by $index">
+                    <td align="center">
+                        <a ui-sref="financingDetail({orderId:order._id})" href="javascript:;">
+                            {{order.orderSn}}
+                        </a>
+
+                    </td>
+                    <td align="center">{{order.createdDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td align="center">{{order.services.title}}</td>
+                    <td align="center">{{order.orderStatus == "0" ? '未处理' : (order.orderStatus == "1" ? '已处理' : '已取消')}}</td>
+                    <td align="center">{{order.contactor}}</td>
+                    <td align="center">{{order.mobile}}</td>
+                    <!--<td align="center">{{order.address}}</td>-->
+                    <td align="center">
+                        <a type="button" class="btn btn-success btn-sm" ng-class="{disabled:((order.orderStatus == '0') ? false : true)}" data-toggle="modal" ng-click="setHandle(order._id)" data-target="#orderHandle" ng-hide="((order.orderStatus == '1') ? true : false)">处理</a>
+                        <a type="button" class="btn btn-success btn-sm" ng-class="{disabled:true}" ng-show="((order.orderStatus == '1') ? true : false)">
+                            完成
+                        </a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:((order.orderStatus == '0') ? false : true)}" data-toggle="modal" ng-click="setDeleteAccount(order._id,order.paidSn)" data-target="#orderCancel" ng-hide="((order.orderStatus == '2') ? true : false)">取消</a>
+                        <a type="button" class="btn btn-danger btn-sm" ng-class="{disabled:true}" ng-show="((order.orderStatus == '2') ? true : false)">
+                            失效
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <!--<div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">-->
+            <!--<p >{{totalCount}}个商品</p>-->
+            <!--</div>-->
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="orderCancel" tabindex="-1" role="dialog" aria-labelledby="orderCancel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalCancel">确认取消</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要取消此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="orderCancel()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderHandle" tabindex="-1" role="dialog" aria-labelledby="orderHandle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalHandle">确认处理</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要处理此订单么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="handle()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

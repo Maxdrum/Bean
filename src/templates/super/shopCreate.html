@@ -1,0 +1,144 @@
+<div class="container-fluid">
+
+    <h3>
+        新建店铺
+    </h3>
+    <div class="row">
+        <div>
+            <a style="margin-left: 15px;" href="javascript:;" onClick="window.history.back()">返回</a>
+        </div>
+    </div>
+
+    <div ui-view style="margin-top: 15px;"></div>
+
+    <div>
+        <form class="form-horizontal" name="addForm">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺名称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="storeName" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">建议使用中文、字母、数字</label>
+                <label></label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺图片(微信)</label>
+                <div class="col-sm-6">
+                    <div ngf-drop ngf-select ng-model="files" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="image/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files[0]">
+                        <img style="margin-left: 10px;width:320px;height:150px;" ngf-src="files[0]"  ngf-accept="'image/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议宽640像素，高300像素</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">店铺图片(App)</label>
+                <div class="col-sm-6">
+                    <div ngf-drop ngf-select ng-model="files2" class="well my-drop-zone" style="cursor: pointer;margin-bottom:5px"
+                         ngf-drag-over-class="file-over-class" ngf-multiple="true"
+                         accept="imageApp/*">点击上传图片
+                    </div>
+
+                    <div class="col-sm-6" ng-show="files2[0]">
+                        <img style="margin-left: 10px;width:159px;height:107px;" ngf-src="files2[0]"  ngf-accept="'imageApp/*'">
+                    </div>
+
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">图片建议宽317像素，高214像素。</label>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">店铺状态</label>-->
+                <!--<div class="col-sm-2">-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" value="1" ng-model="flag1"/> 开启-->
+                    <!--</label>-->
+                    <!--<label class="radio-inline">-->
+                        <!--<input type="radio" value="0" ng-model="flag1"/> 关闭-->
+                    <!--</label>-->
+                <!--</div>-->
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联&nbsp;&nbsp;系&nbsp;&nbsp;人</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="contactor" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请填写您的姓名</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系电话</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="phone" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请输入您的联系方式</label>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">地址</label>-->
+                <!--<div class="col-sm-6">-->
+                    <!--<input type="text" class="form-control" ng-model="address" required>-->
+                <!--</div>-->
+                <!--<label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" ng-model="loginName" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">请填写您的登陆账号</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" ng-model="password" maxlength="10" placeholder="必填" required>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">初始密码最多不超过十位</label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">打印编号</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="printSn" value="" placeholder="编号9位,在打印机底部贴纸上">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">打印密钥</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control"  ng-model="printKey" value="" placeholder="去飞鹅打印机官方网站 www.feieyun.com注册账号,添加打印机编号,自动生成KEY">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">宣&nbsp;&nbsp;传&nbsp;&nbsp;语</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="2"  ng-model="propa" maxlength="40" placeholder="必填" required></textarea>
+                </div>
+                <label style="color: red;margin-left: 10px;margin-top: 10px;">*</label>
+                <label style="margin-left: 10px;">20个中文或40个英文字符</label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" ng-disabled="addForm.$invalid" ng-click="saveStore()" class="btn btn-info">新增店铺</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

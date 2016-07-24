@@ -1,0 +1,84 @@
+<div class="container-fluid"  >
+    <h3>
+        个人信息
+    </h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="bossForm">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-6">
+                        <!--<p class="form-control-static">{{username}}</p>-->
+                        <input type="text" class="form-control"  ng-model="username" value="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">电话</label>
+                    <div class="col-sm-6">
+                        <input type="tel" class="form-control"  ng-model="phone" value="" required>
+                        <p class="bg-info">用于接收忘记密码时发送的验证码</p>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="col-sm-2 control-label">邮箱</label>-->
+                    <!--<div class="col-sm-6">-->
+                        <!--<input type="email" class="form-control"  ng-model="email" value="">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">头像</label>-->
+                <!--<div class="col-sm-6">-->
+                <!--<input type="file" class="form-control"  ng-model="file" value="">-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-disabled="bossForm.$invalid" ng-click="update()" class="btn btn-info">保存信息</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">修改密码</div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="pwdForm">
+                <div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="formerPwd">原密码</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="formerPwd" ng-model="formerPwd" placeholder="请输入您原来的密码" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="currentPwd_1" >新密码</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="currentPwd_1"
+                                   placeholder="请输入您的新密码" ng-model="pwd_1" equals="{{pwd_2}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="currentPwd_2">确认新密码</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="currentPwd_2"
+                                   placeholder="请再次输入您的新密码" ng-model="pwd_2" equals="{{pwd_1}}" required>
+                            <p class="bg-danger" ng-show="pwdNotEqual">请输入正确的新密码</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit"  ng-click="changePwdwithOld()" class="btn btn-info" ng-disabled="pwdNotEqual">修改密码</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,160 @@
+<div class="container-fluid">
+
+    <h3>
+        会员管理
+    </h3>
+
+    <div ui-view style="margin-top: 15px;"></div>
+    <div>
+        <div>
+            <div class="form-group" style="padding-bottom: 20px;">
+                <div class="col-sm-12">
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" value="0" ng-model="flag"/> 注册时间
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="1" ng-model="flag"/> 最后登录时间
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0;">
+                <form class="form-inline">
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="form-group" style="margin-left: -15px;">
+                            <p class="input-group">
+                                <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="status.openedStart"
+                                       max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                          <span class="input-group-btn">
+                            <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                            </p>
+                        </div>
+
+                    <div class="form-group">
+                        <label>到：</label>
+                    </div>
+                    <div class="form-group">
+
+                        <p class="input-group">
+                            <input type="date" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="status.openedEnd"
+                                   max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="关闭" current-text="今天" clear-text="清除" />
+                          <span class="input-group-btn">
+                            <button type="button" style="height: 34px;" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+
+                    </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12" style="min-width: 600px;">
+                        <div class="form-group" style="margin-left: -35px;">
+                            <input type="phone" class="form-control" style="margin-left: 20px;margin-bottom: 12px;" ng-model="phone" placeholder="手机号搜索">
+                        </div>
+
+                        <div class="form-group" style="float: right;">
+                            <button type="submit" class="btn btn-info" ng-click="getPageData(false)">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead>
+                <tr>
+                    <th style="text-align:center;" width="15%">昵称</th>
+                    <th style="text-align:center;" width="15%">手机号</th>
+                    <th style="text-align:center;" width="20%">星云卡号</th>
+                    <th style="text-align:center;" width="20%">注册时间</th>
+                    <th style="text-align:center;" width="20%">最后登录时间</th>
+                    <th style="text-align:center;" width="10%">积分</th>
+                    <!--<th style="text-align:center;" width="20%">操作</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="member in currentMemberList track by $index">
+                    <td align="center">{{member.nickName}}</td>
+                    <td align="center">{{member.mobile}}</td>
+                    <td align="center">{{member.allincardNo}}</td>
+                    <td align="center">{{member.createDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td align="center">{{member.lastAuthCode| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td align="center">{{member.point}}</td>
+                    <!--<td align="center"><a type="button"  ui-sref="account.update({memberId:member._id})" class="btn btn-info btn-sm">修改</a></td>-->
+                    <!--<td align="center"><a type="button" class="btn btn-danger btn-sm" data-toggle="modal" ng-click="setDeleteAccount(member._id)" data-target="#deleteMember">删除</a></td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"  style="margin-top: 20px;color: #aeb2b7;">
+                <p >{{total}}位会员</p>
+            </div>
+            <div style="float: right;padding-right: 15px;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <nav>
+                            <ul class="pagination" style="float: right;">
+                                <li ng-class="{true:'disabled'}[currentPage==1]">
+                                    <a href="javascript:void(0)" aria-label="Previous" ng-click="setCurrentPage(currentPage>1?currentPage-1:1)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li ng-repeat="page in [] |range:pageNum" ng-class="{active:currentPage ==  $index+1}"><a href="javascript:void(0)" ng-click="setCurrentPage($index+1)">{{$index+1}}</a></li>
+                                <li ng-class="{true:'disabled'}[currentPage==pageNum]">
+                                    <a href="javascript:void(0)" aria-label="Next" ng-click="setCurrentPage(currentPage<pageNum?currentPage+1:pageNum)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="deleteMember" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">确认删除</h4>
+                </div>
+                <div class="modal-body">
+                    您确认要删除此商品么？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-click="deleteMember()" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteMembers"  tabindex="-1" role="dialog" aria-labelledby="deleteMembers" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确认删除</h4>
+                </div>
+                <div class="modal-body" ng-show="hasDeleteAccounts == true">
+                    您确认要删除这些商品么？
+                </div>
+                <div class="modal-body" ng-show="hasDeleteAccounts == false">
+                    请先选择要操作的商品！
+                </div>
+                <div class="modal-footer" >
+                    <button ng-show="hasDeleteAccounts == true" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button ng-show="hasDeleteAccounts == true" ng-click="deleteMembers()" class="btn btn-default" data-dismiss="modal">确定</button>
+                    <button ng-show="hasDeleteAccounts == false" class="btn btn-default" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
